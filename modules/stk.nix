@@ -1,22 +1,28 @@
-{ pkgs, config, lib, ... }:
-let cfg = config.recipes.stk;
-  format = pkgs.formats.xml { };
-in {
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
+let
+  cfg = config.recipes.stk;
+in
+{
   options.recipes.stk = {
     enable = lib.mkEnableOption "SuperTuxKart Server";
     package = lib.mkOption {
       type = lib.types.package;
-      default = pkgs.superTuxKart.overrideAttrs (final: prev: {
-        cmakeFlags = prev.cmakeFlags ++ [ "-DSERVER_ONLY=ON" ];
-      });
+      default = pkgs.superTuxKart.overrideAttrs (
+        _final: prev: { cmakeFlags = prev.cmakeFlags ++ [ "-DSERVER_ONLY=ON" ]; }
+      );
     };
     configFile = lib.mkOption {
       type = lib.types.path;
       description = "Path to STK server config file";
     };
   };
-  
-  config = lib.mkIf (cfg.enable) {
+
+  config = lib.mkIf cfg.enable {
     systemd.services.stk-server = {
       description = "SuperTuxKart Server";
       documentation = [ "https://github.com/supertuxkart/stk-code" ];
@@ -48,27 +54,36 @@ in {
         PrivateUsers = true;
         PrivateIPC = true;
         RemoveIPC = true;
-        RestrictAddressFamilies = [ "AF_INET" "AF_INET6" "AF_UNIX" ];
+        RestrictAddressFamilies = [
+          "AF_INET"
+          "AF_INET6"
+          "AF_UNIX"
+        ];
         RestrictNamespaces = true;
         RestrictRealtime = true;
         RestrictSUIDSGID = true;
         SystemCallArchitectures = "native";
-        SystemCallFilter = [ "@system-service" "@resources" ] ++ [
-          "~@clock"
-          "~@debug"
-          "~@module"
-          "~@mount"
-          "~@reboot"
-          "~@swap"
-          "~@cpu-emulation"
-          "~@obsolete"
-          "~@timer"
-          "~@chown"
-          "~@setuid"
-          "~@privileged"
-          "~@keyring"
-          "~@ipc"
-        ];
+        SystemCallFilter =
+          [
+            "@system-service"
+            "@resources"
+          ]
+          ++ [
+            "~@clock"
+            "~@debug"
+            "~@module"
+            "~@mount"
+            "~@reboot"
+            "~@swap"
+            "~@cpu-emulation"
+            "~@obsolete"
+            "~@timer"
+            "~@chown"
+            "~@setuid"
+            "~@privileged"
+            "~@keyring"
+            "~@ipc"
+          ];
         SystemCallErrorNumber = "EPERM";
         StateDirectory = "stk-server";
         StateDirectoryMode = "0700";
@@ -83,4 +98,3 @@ in {
     };
   };
 }
-

@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   cfg = config.recipes.ezbookkeeping;
   configFormat = pkgs.formats.ini { };
@@ -7,7 +12,10 @@ in
   meta.maintainers = with lib.maintainers; [ adtya ];
   options.recipes.ezbookkeeping = {
     enable = lib.mkEnableOption "ezbookkeeping";
-    package = lib.mkPackageOption pkgs [ "ezbookkeeping" "backend" ] { };
+    package = lib.mkPackageOption pkgs [
+      "ezbookkeeping"
+      "backend"
+    ] { };
 
     frontendPackage = lib.mkOption {
       type = lib.types.package;
@@ -47,7 +55,7 @@ in
     };
   };
 
-  config = lib.mkIf (cfg.enable == true) {
+  config = lib.mkIf cfg.enable {
     systemd.services.ezbookkeeping = {
       description = "Ezbookkeeping Server";
       documentation = [ "https://ezbookkeeping.mayswind.net" ];
@@ -80,27 +88,36 @@ in
         PrivateUsers = true;
         PrivateIPC = true;
         RemoveIPC = true;
-        RestrictAddressFamilies = [ "AF_INET" "AF_INET6" "AF_UNIX" ];
+        RestrictAddressFamilies = [
+          "AF_INET"
+          "AF_INET6"
+          "AF_UNIX"
+        ];
         RestrictNamespaces = true;
         RestrictRealtime = true;
         RestrictSUIDSGID = true;
         SystemCallArchitectures = "native";
-        SystemCallFilter = [ "@system-service" "@resources" ] ++ [
-          "~@clock"
-          "~@debug"
-          "~@module"
-          "~@mount"
-          "~@reboot"
-          "~@swap"
-          "~@cpu-emulation"
-          "~@obsolete"
-          "~@timer"
-          "~@chown"
-          "~@setuid"
-          "~@privileged"
-          "~@keyring"
-          "~@ipc"
-        ];
+        SystemCallFilter =
+          [
+            "@system-service"
+            "@resources"
+          ]
+          ++ [
+            "~@clock"
+            "~@debug"
+            "~@module"
+            "~@mount"
+            "~@reboot"
+            "~@swap"
+            "~@cpu-emulation"
+            "~@obsolete"
+            "~@timer"
+            "~@chown"
+            "~@setuid"
+            "~@privileged"
+            "~@keyring"
+            "~@ipc"
+          ];
         SystemCallErrorNumber = "EPERM";
         StateDirectory = "ezbookkeeping";
         StateDirectoryMode = "0700";

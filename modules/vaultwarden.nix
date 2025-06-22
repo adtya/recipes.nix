@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   cfg = config.recipes.vaultwarden;
 in
@@ -30,7 +35,10 @@ in
         ROCKET_ADDRESS = "::1"; # default to localhost
         ROCKET_PORT = 8222;
       };
-      example = { DOMAIN = "https://example.com"; SIGNUPS_ALLOWED = false; };
+      example = {
+        DOMAIN = "https://example.com";
+        SIGNUPS_ALLOWED = false;
+      };
     };
 
     environmentFiles = lib.mkOption {
@@ -43,7 +51,11 @@ in
     package = lib.mkPackageOption pkgs "vaultwarden" { };
 
     databaseBackend = lib.mkOption {
-      type = lib.types.enum [ "sqlite" "mysql" "postgresql" ];
+      type = lib.types.enum [
+        "sqlite"
+        "mysql"
+        "postgresql"
+      ];
       default = "sqlite";
       example = "postgresql";
       description = "The kind of database backend to use";
@@ -57,7 +69,7 @@ in
     };
   };
 
-  config = lib.mkIf (cfg.enable == true) {
+  config = lib.mkIf cfg.enable {
     systemd.services.vaultwarden = {
       description = "Vaultwarden Server";
       documentation = [ "https://github.com/dani-garcia/vaultwarden" ];
@@ -91,27 +103,36 @@ in
         PrivateUsers = true;
         PrivateIPC = true;
         RemoveIPC = true;
-        RestrictAddressFamilies = [ "AF_INET" "AF_INET6" "AF_UNIX" ];
+        RestrictAddressFamilies = [
+          "AF_INET"
+          "AF_INET6"
+          "AF_UNIX"
+        ];
         RestrictNamespaces = true;
         RestrictRealtime = true;
         RestrictSUIDSGID = true;
         SystemCallArchitectures = "native";
-        SystemCallFilter = [ "@system-service" "@resources" ] ++ [
-          "~@clock"
-          "~@debug"
-          "~@module"
-          "~@mount"
-          "~@reboot"
-          "~@swap"
-          "~@cpu-emulation"
-          "~@obsolete"
-          "~@timer"
-          "~@chown"
-          "~@setuid"
-          "~@privileged"
-          "~@keyring"
-          "~@ipc"
-        ];
+        SystemCallFilter =
+          [
+            "@system-service"
+            "@resources"
+          ]
+          ++ [
+            "~@clock"
+            "~@debug"
+            "~@module"
+            "~@mount"
+            "~@reboot"
+            "~@swap"
+            "~@cpu-emulation"
+            "~@obsolete"
+            "~@timer"
+            "~@chown"
+            "~@setuid"
+            "~@privileged"
+            "~@keyring"
+            "~@ipc"
+          ];
         SystemCallErrorNumber = "EPERM";
         StateDirectory = "vaultwarden";
         StateDirectoryMode = "0700";
@@ -126,4 +147,3 @@ in
     };
   };
 }
-

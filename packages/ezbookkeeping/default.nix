@@ -1,4 +1,10 @@
-{ lib, fetchFromGitHub, buildGoModule, buildNpmPackage, git }:
+{
+  lib,
+  fetchFromGitHub,
+  buildGoModule,
+  buildNpmPackage,
+  git,
+}:
 let
   version = "unstable-20250202";
   src = fetchFromGitHub {

@@ -1,18 +1,34 @@
-{ lib
-, buildGoModule
-, fetchFromGitHub
-, callPackage
-, nodejs
-, pnpm
+{
+  lib,
+  buildGoModule,
+  fetchFromGitHub,
+  callPackage,
+  nodejs,
+  pnpm,
 }:
 let
-  inherit (import ./sources.nix { inherit fetchFromGitHub; }) pname version src vendorHash;
+  inherit (import ./sources.nix { inherit fetchFromGitHub; })
+    pname
+    version
+    src
+    vendorHash
+    ;
   web = callPackage ./web.nix { inherit nodejs pnpm fetchFromGitHub; };
 in
 buildGoModule rec {
-  inherit pname version src vendorHash;
+  inherit
+    pname
+    version
+    src
+    vendorHash
+    ;
 
-  ldflags = [ "-s" "-w" "-X main.commit=${src.rev}" "-X main.tag=${version}" ];
+  ldflags = [
+    "-s"
+    "-w"
+    "-X main.commit=${src.rev}"
+    "-X main.tag=${version}"
+  ];
 
   postPatch = ''
     cp -r ${web}/share/autobrr-web/* web/dist/
