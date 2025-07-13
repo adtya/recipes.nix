@@ -30,6 +30,12 @@ in
     };
     "queryamoid@kaply.com" =
       install "https://github.com/mkaply/queryamoid/releases/download/v0.2/query_amo_addon_id-0.2-fx.xpi";
+    "uBlock0@raymondhill.net" =
+      install "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
+    "jid1-MnnxcxisBPnSXQ@jetpack" =
+      install "https://addons.mozilla.org/firefox/downloads/latest/privacy-badger17/latest.xpi";
+    "{b743f56d-1cc1-4048-8ba6-f9c2ab7aa54d}" =
+      install "https://addons.mozilla.org/firefox/downloads/latest/dracula-dark-colorscheme/latest.xpi";
   } // extensionPolicies;
   FirefoxHome = {
     Search = true;
