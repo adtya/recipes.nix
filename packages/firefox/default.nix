@@ -6,6 +6,7 @@
   disablePeskyfox ? false,
   disableSecurefox ? false,
   disableSmoothfox ? false,
+  extensions ? [ ],
 }:
 let
   betterfox-src = pkgs.fetchFromGitHub {
@@ -23,9 +24,18 @@ let
     ${lib.optionalString (!disableSmoothfox) (lockPrefs (loadPrefs "Smoothfox"))}
     ${builtins.readFile ./prefs.cfg}
   '';
-
+  installExtension = install_url: {
+    inherit install_url;
+    installation_mode = "force_installed";
+  };
+  extensionPolicies = builtins.listToAttrs (
+    builtins.map (x: {
+      name = x.id;
+      value = installExtension x.url;
+    }) extensions
+  );
 in
 firefoxPkg.override {
-  extraPolicies = import ./policies.nix;
+  extraPolicies = import ./policies.nix { inherit extensionPolicies; };
   inherit extraPrefs;
 }
