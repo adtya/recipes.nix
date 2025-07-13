@@ -12,10 +12,7 @@ in
   meta.maintainers = with lib.maintainers; [ adtya ];
   options.recipes.ezbookkeeping = {
     enable = lib.mkEnableOption "ezbookkeeping";
-    package = lib.mkPackageOption pkgs [
-      "ezbookkeeping"
-      "backend"
-    ] { };
+    package = lib.mkPackageOption pkgs [ "ezbookkeeping" "backend" ] { };
 
     frontendPackage = lib.mkOption {
       type = lib.types.package;

@@ -173,7 +173,8 @@ let
         StartLimitBurst = 5;
       };
     };
-  mkSystemdService = name: serviceDefinition:
+  mkSystemdService =
+    name: serviceDefinition:
     lib.nameValuePair "conduwuit-${name}" (systemdService name serviceDefinition);
 in
 {
