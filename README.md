@@ -29,6 +29,17 @@ nixosConfigurations.<hostname> = lib.nixosSystem {
 ```
 ## Packages
 ### Firefox
+This is a firefox derivation with the config I use on my personal machines, tweaked to be used by anyone in their NixOS, nix-darwin or home-manager configuration.
+
+The changes include:
+ - [Betterfox](https://github.com/yokoffing/BetterFox)
+ - Policy tweaks to disable crap like telemetry, Firefox Account, etc. (refer [policies.nix](./packages/firefox/policies.nix) and [Policy Templates](https://mozilla.github.io/policy-templates) for details)
+ - Vertical Sidebar (and tabs)
+ - [Privacy Badger](https://privacybadger.org) and [uBlock Origin](https://ublockorigin.com) and installed OOTB
+ - [Dracula](https://draculatheme.com/firefox) theme applied OOTB
+ - and more ...
+
+
 If the overlay is added as above, use `pkgs.firefox-overkill` instead of the typical `pkgs.firefox`. If the overlay is not added, use `inputs.recipes.packages.${pkgs.system}.firefox-overkill` instead.
 
 All the [Betterfox](https://github.com/yokoffing/BetterFox) prefs are included OOTB. These can be disabled by setting one or more of:
