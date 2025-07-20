@@ -1,7 +1,7 @@
 {
   pkgs,
   lib,
-  firefoxPkg ? pkgs.firefox,
+  firefoxPkg ? pkgs.firefox-unwrapped,
   disableFastfox ? false,
   disablePeskyfox ? false,
   disableSecurefox ? false,
@@ -35,7 +35,7 @@ let
     }) extensions
   );
 in
-firefoxPkg.override {
+pkgs.wrapFirefox firefoxPkg {
   extraPolicies = import ./policies.nix { inherit extensionPolicies; };
   inherit extraPrefs;
 }
