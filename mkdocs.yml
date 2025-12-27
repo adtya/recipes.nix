@@ -1,0 +1,6 @@
+site_name: Recipes.nix Documentation
+repo_url: https://github.com/adtya/recipes.nix
+theme:
+  name: material
+nav:
+  - xyz.adtya.recipes: index.md
