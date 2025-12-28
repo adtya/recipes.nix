@@ -1,6 +1,6 @@
 site_name: Recipes.nix Documentation
 repo_url: https://github.com/adtya/recipes.nix
-theme:
-  name: material
+theme: material
 nav:
-  - xyz.adtya.recipes: index.md
+  - Usage: index.md
+  - NixOS Options: nixos-options.md

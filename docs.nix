@@ -9,6 +9,8 @@
   ...
 }:
 let
+
+  # Replace file:// hyperlinks to Nix Store with github urls
   toURL =
     decl:
     let
@@ -25,16 +27,17 @@ let
       decl;
 
   mapURLs = opt: opt // { declarations = map toURL opt.declarations; };
-  
+
   eval = lib.evalModules { modules = [ ./modules/nixos/options ]; };
-  cleanEval = lib.filterAttrsRecursive (n: _v: n != "_module") eval; # https://github.com/NixOS/nixpkgs/issues/293510
+
+  # https://github.com/NixOS/nixpkgs/issues/293510
+  cleanEval = lib.filterAttrsRecursive (n: _v: n != "_module") eval;
 
   optionsDoc = nixosOptionsDoc {
     inherit (cleanEval) options;
     transformOptions = mapURLs;
   };
-in
-rec {
+
   site = stdenvNoCC.mkDerivation {
     src = ./.;
     name = "docs";
@@ -42,10 +45,11 @@ rec {
     nativeBuildInputs = [
       mkdocs
       python3Packages.mkdocs-material
+      python3Packages.pygments
     ];
 
     buildPhase = ''
-      cp ${optionsDoc.optionsCommonMark} ./docs/index.md
+      cp ${optionsDoc.optionsCommonMark} ./docs/nixos-options.md
       mkdocs build
     '';
 
@@ -54,7 +58,10 @@ rec {
     '';
 
   };
-  webserver = writeShellScriptBin "app" ''
+in
+{
+  inherit site;
+  devserver = writeShellScriptBin "app" ''
     trap 'kill "''${child_pid}"; wait "''${child_pid}";' SIGINT SIGTERM
     ${merecat}/bin/merecat -n -p 8080 ${site} &
     child_pid="$!"

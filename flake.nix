@@ -40,7 +40,7 @@
         import inputs.nixpkgs {
           inherit system;
           config.allowUnfree = true;
-          overlays = [ (import ./packages) ];
+          overlays = [ inputs.self.overlays.default ];
         };
     in
     {
@@ -68,6 +68,7 @@
         })
       );
 
+      overlays.default = import ./overlays;
       nixosModules.default = import ./modules/nixos;
       homeManagerModules.default = import ./modules/home-manager;
 
