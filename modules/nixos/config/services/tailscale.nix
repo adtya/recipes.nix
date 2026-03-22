@@ -1,6 +1,6 @@
 { lib, config, ... }:
 let
-  cfg = config.xyz.adtya.recipes.tailscale;
+  cfg = config.xyz.adtya.recipes.services.tailscale;
 in
 {
   config = lib.mkIf cfg.enable {

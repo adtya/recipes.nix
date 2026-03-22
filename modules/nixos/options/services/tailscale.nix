@@ -1,7 +1,7 @@
 { lib, ... }:
 {
   options = {
-    xyz.adtya.recipes.tailscale = {
+    xyz.adtya.recipes.services.tailscale = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = false;
