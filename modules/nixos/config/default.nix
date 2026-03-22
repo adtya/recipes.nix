@@ -1,7 +1,7 @@
 _: {
   imports = [
-    ./nix.nix
-    ./sops.nix
+    ./core
+
     ./tailscale.nix
   ];
 }

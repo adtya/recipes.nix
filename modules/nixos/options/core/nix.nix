@@ -1,7 +1,7 @@
 { lib, ... }:
 {
   options = {
-    xyz.adtya.recipes.nix = {
+    xyz.adtya.recipes.core.nix = {
       auto-gc = lib.mkOption {
         type = lib.types.bool;
         default = false;

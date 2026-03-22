@@ -1,7 +1,7 @@
 { lib, ... }:
 {
   options = {
-    xyz.adtya.recipes.sops = {
+    xyz.adtya.recipes.core.sops = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = false;

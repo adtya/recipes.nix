@@ -1,6 +1,6 @@
 { lib, config, ... }:
 let
-  cfg = config.xyz.adtya.recipes.nix;
+  cfg = config.xyz.adtya.recipes.core.nix;
   nixDefaultSettings = {
     nix = {
       channel.enable = false;

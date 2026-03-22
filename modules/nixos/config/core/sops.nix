@@ -5,7 +5,7 @@
   ...
 }:
 let
-  cfg = config.xyz.adtya.recipes.sops;
+  cfg = config.xyz.adtya.recipes.core.sops;
 in
 {
   imports = lib.mkIf cfg.enable [ inputs.sops-nix.nixosModules.sops ];
