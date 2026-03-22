@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   nixosOptionsDoc,
   stdenvNoCC,
   mkdocs,
@@ -28,7 +29,10 @@ let
 
   mapURLs = opt: opt // { declarations = map toURL opt.declarations; };
 
-  eval = lib.evalModules { modules = [ ./modules/nixos/options ]; };
+  eval = lib.evalModules {
+    modules = [ ./modules/nixos/options ];
+    specialArgs = { inherit pkgs; };
+  };
 
   # https://github.com/NixOS/nixpkgs/issues/293510
   cleanEval = lib.filterAttrsRecursive (n: _v: n != "_module") eval;
