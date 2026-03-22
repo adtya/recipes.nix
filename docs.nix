@@ -6,7 +6,7 @@
   mkdocs,
   python3Packages,
   writeShellScriptBin,
-  merecat,
+  python3Minimal,
   ...
 }:
 let
@@ -67,7 +67,7 @@ in
   inherit site;
   devserver = writeShellScriptBin "app" ''
     trap 'kill "''${child_pid}"; wait "''${child_pid}";' SIGINT SIGTERM
-    ${merecat}/bin/merecat -n -p 8080 ${site} &
+    ${lib.getExe python3Minimal} -m http.server -d ${site} -b 127.0.0.1 8080 &
     child_pid="$!"
     wait "''${child_pid}"
   '';
