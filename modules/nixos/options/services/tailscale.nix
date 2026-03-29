@@ -8,7 +8,7 @@
         example = true;
         description = "Enable Tailscale";
       };
-      net-name = lib.mkOption {
+      tailnet-name = lib.mkOption {
         type = lib.types.nullOr lib.types.str;
         default = null;
         example = "tail123456.ts.net";
