@@ -21,7 +21,7 @@ let
     in
     if lib.hasPrefix root declStr then
       {
-        url = "https://github.com/adtya/recipes.nix/blob/main/${subpath}";
+        url = "https://codeberg.org/adtya/recipes.nix/src/branch/main/${subpath}";
         name = "recipes.nix/${subpath}";
       }
     else
