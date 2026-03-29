@@ -1,4 +1,12 @@
-{ lib, ... }:
+{
+  lib,
+  config,
+  inputs,
+  ...
+}:
+let
+  cfg = config.xyz.adtya.recipes.core.sops;
+in
 {
   options = {
     xyz.adtya.recipes.core.sops = {
@@ -16,4 +24,6 @@
       };
     };
   };
+
+  config = lib.mkIf cfg.enable { sops.defaultSopsFile = cfg.secrets-file; };
 }

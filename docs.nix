@@ -30,8 +30,12 @@ let
   mapURLs = opt: opt // { declarations = map toURL opt.declarations; };
 
   eval = lib.evalModules {
-    modules = [ ./modules/nixos/options ];
+    modules = [
+      (_: { _module.check = false; })
+      ./modules/nixos
+    ];
     specialArgs = { inherit pkgs; };
+    class = "recipesConfig";
   };
 
   # https://github.com/NixOS/nixpkgs/issues/293510
