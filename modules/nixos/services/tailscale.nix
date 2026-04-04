@@ -20,7 +20,7 @@ in
       };
       auth-file = lib.mkOption {
         type = lib.types.nullOr lib.types.str;
-        default = null;
+        default = "/persist/secrets/tailscale/key";
         example = "/run/secrets/tailscale_auth";
         description = "Path to a file containing Tailscale Auth key";
       };
