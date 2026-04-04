@@ -1,1 +1,6 @@
-_: { imports = [ ./tailscale.nix ]; }
+_: {
+  imports = [
+    ./ssh.nix
+    ./tailscale.nix
+  ];
+}
