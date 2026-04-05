@@ -11,9 +11,7 @@ in
       sops
       ssh-to-age
       nil
-      mkdocs
-      python3Packages.mkdocs-material
-      python3Packages.pygments
+      mdbook
     ];
   };
 }
