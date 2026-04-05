@@ -2,6 +2,7 @@ _: {
   imports = [
     ./boot
     ./core
+    ./desktop
     ./misc
     ./networking
     ./presets

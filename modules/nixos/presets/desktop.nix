@@ -22,6 +22,7 @@ in
 
     programs = {
       command-not-found.enable = false;
+      dconf.enable = true;
       fuse.userAllowOther = true;
       xwayland.enable = true;
     };
