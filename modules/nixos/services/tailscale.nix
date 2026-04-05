@@ -2,6 +2,7 @@
 let
   cfg = config.xyz.adtya.recipes.services.tailscale;
   sops-cfg = config.xyz.adtya.recipes.core.sops;
+  preset-cfg = config.xyz.adtya.recipes.presets;
 in
 {
   options = {
@@ -41,6 +42,8 @@ in
       authKeyFile = if sops-cfg.enable then config.sops.secrets.${cfg.auth-file}.path else cfg.auth-file;
       openFirewall = true;
       extraDaemonFlags = [ "--no-logs-no-support" ];
+      extraSetFlags = lib.mkIf preset-cfg.server [ "--ssh" ];
+      extraUpFlags = lib.mkIf preset-cfg.server [ "--ssh" ];
     };
 
     networking.firewall.trustedInterfaces = [ config.services.tailscale.interfaceName ];
