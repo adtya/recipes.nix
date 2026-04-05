@@ -1,9 +1,7 @@
-{
-  lib,
-  config,
-  inputs,
-  ...
-}:
+{ lib, config, ... }:
+let
+  cfg = config.xyz.adtya.recipes.hostinfo;
+in
 {
   options = {
     xyz.adtya.recipes.hostinfo = {
@@ -32,4 +30,6 @@
       };
     };
   };
+
+  config = lib.mkIf (cfg.host-name != null) { networking.hostName = cfg.host-name; };
 }
