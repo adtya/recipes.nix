@@ -1,5 +1,6 @@
 _: {
   imports = [
+    ./boot
     ./core
     ./presets
     ./programs

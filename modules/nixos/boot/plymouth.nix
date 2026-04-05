@@ -5,29 +5,29 @@
   ...
 }:
 let
-  cfg = config.xyz.adtya.recipes.services.dbus;
+  theme = "hexagon_dots";
+  cfg = config.xyz.adtya.recipes.boot.plymouth;
   preset-cfg = config.xyz.adtya.recipes.presets;
 in
 {
   options = {
-    xyz.adtya.recipes.services.dbus = {
+    xyz.adtya.recipes.boot.plymouth = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = preset-cfg.desktop;
         defaultText = lib.literalMD "[config.xyz.adtya.recipes.presets.desktop](#xyzadtyarecipespresetsdesktop)";
-        description = "Enable DBus";
+        description = "Enable Plymouth";
       };
     };
   };
 
   config = lib.mkIf cfg.enable {
-    services.dbus = {
+    boot.plymouth = {
       enable = true;
-      packages = with pkgs; [
-        gcr
-        gcr_4
+      themePackages = lib.mkDefault [
+        (pkgs.adi1090x-plymouth-themes.override { selected_themes = [ theme ]; })
       ];
-      implementation = "broker";
+      theme = lib.mkDefault theme;
     };
   };
 }
