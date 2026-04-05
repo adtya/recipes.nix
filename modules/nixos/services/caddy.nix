@@ -14,7 +14,6 @@ in
       enable = lib.mkOption {
         type = lib.types.bool;
         default = false;
-        example = true;
         description = "Enable Caddy";
       };
       env-file = lib.mkOption {

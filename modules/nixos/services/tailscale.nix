@@ -9,7 +9,6 @@ in
       enable = lib.mkOption {
         type = lib.types.bool;
         default = false;
-        example = true;
         description = "Enable Tailscale";
       };
       tailnet-name = lib.mkOption {
@@ -21,7 +20,6 @@ in
       auth-file = lib.mkOption {
         type = lib.types.nullOr lib.types.str;
         default = "/persist/secrets/tailscale/key";
-        example = "/run/secrets/tailscale_auth";
         description = "Path to a file containing Tailscale Auth key";
       };
     };
