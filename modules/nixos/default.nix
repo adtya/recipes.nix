@@ -6,6 +6,7 @@ _: {
     ./programs
     ./networking
     ./services
+    ./virtualisation
 
     ./hostinfo.nix
   ];
