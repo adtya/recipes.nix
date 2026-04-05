@@ -5,6 +5,7 @@ let
     nix = {
       channel.enable = false;
       settings = {
+        auto-allocate-uids = true;
         download-buffer-size = 1073741824;
         experimental-features = [
           "nix-command"
@@ -13,8 +14,8 @@ let
           "cgroups"
           "ca-derivations"
         ];
-        auto-allocate-uids = true;
         sandbox = true;
+        trusted-users = [ "@wheel" ];
         use-cgroups = true;
       };
     };

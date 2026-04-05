@@ -11,5 +11,42 @@ in
     };
   };
 
-  config = lib.mkIf cfg { };
+  config = lib.mkIf cfg {
+    xyz.adtya.recipes.core.admin.needs-password = false;
+    powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
+    systemd = {
+      settings.Manager = {
+        KExecWatchdogSec = "1m";
+        RebootWatchdogSec = "30s";
+        RuntimeWatchdogSec = "15s";
+      };
+      enableEmergencyMode = false;
+      sleep.settings.Sleep = {
+        AllowSuspend = "no";
+        AllowHibernation = "no";
+      };
+    };
+    virtualisation.oci-containers = {
+      backend = "podman";
+    };
+
+    documentation = {
+      enable = lib.mkDefault false;
+      doc.enable = lib.mkDefault false;
+      info.enable = lib.mkDefault false;
+      man.enable = lib.mkDefault false;
+      nixos.enable = lib.mkDefault false;
+    };
+
+    fonts.fontconfig.enable = lib.mkDefault false;
+    programs.command-not-found.enable = lib.mkDefault false;
+
+    xdg = {
+      autostart.enable = lib.mkDefault false;
+      icons.enable = lib.mkDefault false;
+      mime.enable = lib.mkDefault false;
+      sounds.enable = lib.mkDefault false;
+      menus.enable = lib.mkDefault false;
+    };
+  };
 }
