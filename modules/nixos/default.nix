@@ -3,5 +3,7 @@ _: {
     ./core
     ./programs
     ./services
+
+    ./hostinfo.nix
   ];
 }
