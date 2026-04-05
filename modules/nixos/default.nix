@@ -2,9 +2,10 @@ _: {
   imports = [
     ./boot
     ./core
+    ./misc
+    ./networking
     ./presets
     ./programs
-    ./networking
     ./services
     ./virtualisation
 
