@@ -13,7 +13,7 @@ in
   options = {
     xyz.adtya.recipes.core.users = {
       root-password-hash-file = lib.mkOption {
-        type = lib.types.path;
+        type = lib.types.str;
         example = "/persist/secrets/root-password-hash";
         description = "Path to file containing passsword hash for root user";
       };
@@ -24,7 +24,7 @@ in
           description = "user name for the non-root primarty user";
         };
         password-hash-file = lib.mkOption {
-          type = lib.types.path;
+          type = lib.types.str;
           example = "/persist/secrets/password-hash";
           description = "Path to file containing the user's password hash";
         };
