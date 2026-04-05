@@ -6,6 +6,7 @@
 }:
 let
   cfg = config.xyz.adtya.recipes.core.users;
+  sops-cfg = config.xyz.adtya.recipes.core.sops;
 in
 {
 
@@ -13,16 +14,10 @@ in
     xyz.adtya.recipes.core.users = {
       root-password-hash-file = lib.mkOption {
         type = lib.types.path;
-        example = "/secrets/password-hash";
+        example = "/persist/secrets/root-password-hash";
         description = "Path to file containing passsword hash for root user";
       };
       primary = {
-        id = lib.mkOption {
-          type = lib.types.int;
-          default = 1000;
-          example = 1001;
-          description = "user id for the non-root primary user";
-        };
         name = lib.mkOption {
           type = lib.types.str;
           example = "john";
@@ -30,19 +25,13 @@ in
         };
         password-hash-file = lib.mkOption {
           type = lib.types.path;
-          example = "/secrets/password-hash";
+          example = "/persist/secrets/password-hash";
           description = "Path to file containing the user's password hash";
         };
         long-name = lib.mkOption {
           type = lib.types.str;
           example = "John Doe";
           description = "Longer version of the user's name";
-        };
-        shell = lib.mkOption {
-          type = lib.types.package;
-          default = pkgs.zsh;
-          example = pkgs.fish;
-          description = "Default shell of the user";
         };
         extra-groups = lib.mkOption {
           type = lib.types.listOf lib.types.str;
@@ -60,18 +49,42 @@ in
   };
 
   config = {
+    sops = lib.mkIf sops-cfg.enable {
+      secrets = {
+        "${cfg.root-password-hash-file}" = {
+          mode = "400";
+          owner = config.users.users.root.name;
+          inherit (config.users.users.root) group;
+          neededForUsers = true;
+        };
+        "${cfg.primary.password-hash-file}" = {
+          mode = "400";
+          owner = config.users.users.root.name;
+          inherit (config.users.users.root) group;
+          neededForUsers = true;
+        };
+      };
+    };
     users = {
       mutableUsers = false;
       users = {
         root = {
-          hashedPasswordFile = cfg.root-password-hash-file;
+          hashedPasswordFile =
+            if sops-cfg.enable then
+              config.sops.secrets.${cfg.root-password-hash-file}.path
+            else
+              cfg.root-password-hash-file;
         };
         "${cfg.primary.name}" = {
           isNormalUser = true;
-          uid = cfg.primary.id;
-          hashedPasswordFile = cfg.primary.password-hash-file;
+          uid = 1000;
+          hashedPasswordFile =
+            if sops-cfg.enable then
+              config.sops.secrets.${cfg.primary.password-hash-file}.path
+            else
+              cfg.primary.password-hash-file;
           description = cfg.primary.long-name;
-          inherit (cfg.primary) shell;
+          shell = pkgs.zsh;
           extraGroups = cfg.primary.extra-groups;
           openssh.authorizedKeys.keys = cfg.primary.allowed-ssh-keys;
         };
