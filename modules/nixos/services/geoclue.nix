@@ -1,14 +1,14 @@
 { lib, config, ... }:
 let
   cfg = config.xyz.adtya.recipes.services.geoclue;
-  desktop-cfg = config.xyz.adtya.recipes.presets.desktop;
+  preset-cfg = config.xyz.adtya.recipes.presets;
 in
 {
   options = {
     xyz.adtya.recipes.services.geoclue = {
       enable = lib.mkOption {
         type = lib.types.bool;
-        default = desktop-cfg;
+        default = preset-cfg.desktop;
         defaultText = lib.literalMD "[config.xyz.adtya.recipes.presets.desktop](#xyzadtyarecipespresetsdesktop)";
         description = "Enable Geoclue";
       };

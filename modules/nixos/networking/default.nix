@@ -1,4 +1,4 @@
-{lib, config, ...}:
+{ lib, config, ... }:
 let
   cfg = config.xyz.adtya.recipes.networking;
 in
