@@ -7,19 +7,20 @@
 let
   cfg = config.xyz.adtya.recipes.services.caddy;
   sops-cfg = config.xyz.adtya.recipes.core.sops;
+  preset-cfg = config.xyz.adtya.recipes.presets;
 in
 {
   options = {
     xyz.adtya.recipes.services.caddy = {
       enable = lib.mkOption {
         type = lib.types.bool;
-        default = false;
+        default = preset-cfg.server;
+        defaultText = lib.literalMD "[config.xyz.adtya.recipes.presets.server](#xyzadtyarecipespresetsserver)";
         description = "Enable Caddy";
       };
       env-file = lib.mkOption {
         type = lib.types.nullOr lib.types.str;
         default = "/persist/secrets/caddy/env";
-        example = "/run/secrets/caddy_env";
         description = "Path to a file containing environment variables for the service";
       };
     };
@@ -53,11 +54,12 @@ in
     systemd.services.caddy = lib.mkIf config.services.caddy.enable {
       serviceConfig.EnvironmentFile =
         if sops-cfg.enable then config.sops.secrets.${cfg.env-file}.path else cfg.env-file;
-      after = [
+
+      after = lib.mkIf config.services.tailscale.enable [
         "tailscaled.service"
         "tailscaled-autoconnect.service"
       ];
-      unitConfig.Requires = [
+      unitConfig.Requires = lib.mkIf config.services.tailscale.enable [
         "tailscaled.service"
         "tailscaled-autoconnect.service"
       ];
