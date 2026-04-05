@@ -1,1 +1,6 @@
-_: { imports = [ ./bluetooth.nix ]; }
+_: {
+  imports = [
+    ./bluetooth.nix
+    ./devtools.nix
+  ];
+}

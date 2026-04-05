@@ -1,4 +1,9 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 let
   cfg = config.xyz.adtya.recipes.presets.desktop;
 in
@@ -12,6 +17,8 @@ in
   };
 
   config = lib.mkIf cfg {
+
+    environment.systemPackages = with pkgs; [ ghostty ];
 
     programs = {
       command-not-found.enable = false;
