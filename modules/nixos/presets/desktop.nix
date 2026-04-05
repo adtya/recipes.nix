@@ -12,6 +12,12 @@ in
   };
 
   config = lib.mkIf cfg {
+
+    programs = {
+      command-not-found.enable = false;
+      fuse.userAllowOther = true;
+    };
+
     security = {
       pam = {
         services = {
