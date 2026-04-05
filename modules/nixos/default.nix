@@ -1,6 +1,7 @@
 _: {
   imports = [
     ./core
+    ./presets
     ./programs
     ./networking
     ./services
