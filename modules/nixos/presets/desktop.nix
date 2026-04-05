@@ -23,6 +23,7 @@ in
     programs = {
       command-not-found.enable = false;
       fuse.userAllowOther = true;
+      xwayland.enable = true;
     };
 
     security = {
@@ -43,7 +44,13 @@ in
       gvfs.enable = true;
       pcscd.enable = true;
       power-profiles-daemon.enable = true;
+      udev.enable = true;
       udisks2.enable = true;
+    };
+
+    xdg.portal = {
+      enable = true;
+      xdgOpenUsePortal = true;
     };
   };
 }
