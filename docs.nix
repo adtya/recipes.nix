@@ -3,8 +3,7 @@
   pkgs,
   nixosOptionsDoc,
   stdenvNoCC,
-  mkdocs,
-  python3Packages,
+  mdbook,
   writeShellScriptBin,
   python3Minimal,
   ...
@@ -22,7 +21,7 @@ let
     if lib.hasPrefix root declStr then
       {
         url = "https://codeberg.org/adtya/recipes.nix/src/branch/main/${subpath}";
-        name = "recipes.nix/${subpath}";
+        name = "${subpath}";
       }
     else
       decl;
@@ -47,22 +46,18 @@ let
   };
 
   site = stdenvNoCC.mkDerivation {
+    name = "recipe-docs";
     src = ./.;
-    name = "docs";
 
-    nativeBuildInputs = [
-      mkdocs
-      python3Packages.mkdocs-material
-      python3Packages.pygments
-    ];
+    nativeBuildInputs = [ mdbook ];
 
     buildPhase = ''
       cp ${optionsDoc.optionsCommonMark} ./docs/nixos-options.md
-      mkdocs build
+      mdbook build
     '';
 
     installPhase = ''
-      cp -r site $out
+      cp -r book $out
     '';
 
   };

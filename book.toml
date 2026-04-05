@@ -1,0 +1,14 @@
+[book]
+authors = ["Adithya"]
+language = "en"
+src = "docs"
+title = "Recipes.nix Documentation"
+
+[output.html]
+git-repository-url = "https://codeberg.org/adtya/recipes.nix"
+git-repository-icon = "fas-code"
+
+[output.html.print]
+enable = false
+
+

@@ -1,6 +1,0 @@
-site_name: Recipes.nix Documentation
-repo_url: https://codeberg.org/adtya/recipes.nix
-theme: material
-nav:
-  - Usage: index.md
-  - NixOS Options: nixos-options.md
