@@ -3,8 +3,8 @@
 ```nix
 {
     ...
-    inputs.recipes.url = "github:adtya/recipes.nix?ref=main";
-    outputs = { recipes, ...}: {
+    inputs.recipes.url = "git+https://codeberg.org/adtya/recipes.nix?ref=main";
+    outputs = inputs: {
         ...
     };
 }
@@ -13,7 +13,7 @@
 ## Add the package overlay
 
 ```nix
-nixpkgs.overlays = [ recipes.overlays.default ];
+nixpkgs.overlays = [ inputs.recipes.overlays.default ];
 ```
 
 ## Add the NixOS Module
@@ -22,7 +22,7 @@ nixpkgs.overlays = [ recipes.overlays.default ];
 nixosConfigurations.<hostname> = lib.nixosSystem {
     ...
     modules = [
-       recipes.nixosModules.default
+       inputs.recipes.nixosModules.default
        ...
     ];
     ...
