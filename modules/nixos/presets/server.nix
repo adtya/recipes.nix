@@ -1,4 +1,9 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 let
   cfg = config.xyz.adtya.recipes.presets.server;
 in
@@ -14,6 +19,10 @@ in
   config = lib.mkIf cfg {
     xyz.adtya.recipes.core.admin.needs-password = false;
 
+    environment.systemPackages = with pkgs; [
+      age
+      sops
+    ];
     powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
 
     programs = {
