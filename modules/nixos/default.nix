@@ -1,5 +1,7 @@
 _: {
   imports = [
+    inputs.sops-nix.nixosModules.sops
+
     ./boot
     ./core
     ./desktop

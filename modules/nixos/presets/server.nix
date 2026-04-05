@@ -13,7 +13,19 @@ in
 
   config = lib.mkIf cfg {
     xyz.adtya.recipes.core.admin.needs-password = false;
+
     powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
+
+    programs = {
+      command-not-found.enable = false;
+      neovim = {
+        enable = true;
+        defaultEditor = true;
+        viAlias = true;
+        vimAlias = true;
+      };
+    };
+
     systemd = {
       settings.Manager = {
         KExecWatchdogSec = "1m";
@@ -26,6 +38,7 @@ in
         AllowHibernation = "no";
       };
     };
+
     virtualisation.oci-containers = {
       backend = "podman";
     };
@@ -39,7 +52,6 @@ in
     };
 
     fonts.fontconfig.enable = lib.mkDefault false;
-    programs.command-not-found.enable = lib.mkDefault false;
 
     xdg = {
       autostart.enable = lib.mkDefault false;
