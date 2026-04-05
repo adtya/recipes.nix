@@ -12,6 +12,16 @@ in
   };
 
   config = lib.mkIf cfg {
+    security = {
+      pam = {
+        services = {
+          passwd.enableGnomeKeyring = true;
+          login.enableGnomeKeyring = true;
+        };
+      };
+      rtkit.enable = true;
+    };
+
     services = {
       flatpak.enable = true;
       fstrim.enable = true;
