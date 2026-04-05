@@ -38,8 +38,6 @@ in
       };
     };
 
-    nodeconfig.facts.tailnet-name = cfg.tailnet-name;
-
     services.tailscale = {
       enable = true;
       authKeyFile = if sops-cfg.enable then config.sops.secrets.${cfg.auth-file}.path else cfg.auth-file;
