@@ -41,6 +41,23 @@ in
       sessionVariables = {
         NIXOS_OZONE_WL = 1;
       };
+      systemPackage = with pkgs; [
+        _1password-cli
+        _1password-gui
+        bitwarden-cli
+        bitwarden-desktop
+        btop
+        android-file-transfer
+        discord
+        file
+        localsend
+        nvtopPackages.amd
+        spotify
+        transmission_4-gtk
+        unzip
+        wl-clipboard
+        xdg-utils
+      ];
     };
 
     gtk.iconCache.enable = true;
