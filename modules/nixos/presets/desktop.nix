@@ -41,7 +41,7 @@ in
       sessionVariables = {
         NIXOS_OZONE_WL = 1;
       };
-      systemPackage = with pkgs; [
+      systemPackages = with pkgs; [
         _1password-cli
         _1password-gui
         bitwarden-cli

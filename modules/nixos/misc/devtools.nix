@@ -36,7 +36,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    environment.systemPackage = with pkgs; [
+    environment.systemPackages = with pkgs; [
       delta
       doctl
       flyctl
