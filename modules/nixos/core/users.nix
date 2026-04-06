@@ -33,6 +33,11 @@ in
           example = "John Doe";
           description = "Longer version of the user's name";
         };
+        email = lib.mkOption {
+          type = lib.types.str;
+          example = "John@example.org";
+          description = "User's email. (used with git and friends)";
+        };
         extra-groups = lib.mkOption {
           type = lib.types.listOf lib.types.str;
           default = [ "wheel" ];

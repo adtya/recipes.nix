@@ -8,6 +8,7 @@ let
   cfg = config.xyz.adtya.recipes.services.caddy;
   sops-cfg = config.xyz.adtya.recipes.core.sops;
   preset-cfg = config.xyz.adtya.recipes.presets;
+  user-cfg = config.xyz.adtya.recipes.core.users;
 in
 {
   options = {
@@ -22,6 +23,12 @@ in
         type = lib.types.nullOr lib.types.str;
         default = "/persist/secrets/caddy/env";
         description = "Path to a file containing environment variables for the service";
+      };
+      email = lib.mkOption {
+        type = lib.types.str;
+        default = user-cfg.primary.email;
+        defaultText = lib.literalMD "[config.xyz.adtya.recipes.core.users.primary.email](#xyzadtyarecipescoreusersprimaryemail)";
+        description = "Email used with ACME";
       };
     };
   };
@@ -40,7 +47,7 @@ in
     services.caddy = {
       enable = true;
       package = pkgs.caddy-hetzner;
-      email = "admin@ironyofprivacy.org";
+      inherit (cfg) email;
       extraConfig = ''
         (hetzner) {
           tls {

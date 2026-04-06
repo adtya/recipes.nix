@@ -27,7 +27,8 @@ in
         };
         user-email = lib.mkOption {
           type = lib.types.str;
-          default = "";
+          default = user-cfg.primary.email;
+          defaultText = lib.literalMD "[config.xyz.adtya.recipes.core.users.primary.email](#xyzadtyarecipescoreusersprimaryemail)";
           description = "Email of git user";
         };
       };
