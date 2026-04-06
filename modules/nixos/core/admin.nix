@@ -36,15 +36,18 @@ in
         extraConfig = ''
           polkit.addRule(function(action, subject) {
             if (subject.isInGroup("wheel")) {
-              return ${if cfg.needs-password then "polkit.Result.AUTH_ADMIN_KEEP" else "polkit.Result.YES"};
+              return polkit.Result.AUTH_ADMIN_KEEP;
             }
           });
         '';
       };
-      run0 = {
-        enableSudoAlias = true;
+      sudo = {
+        enable = true;
+        extraConfig = ''
+          Defaults lecture="never"
+        '';
+        wheelNeedsPassword = cfg.needs-password;
       };
-      sudo.enable = !config.security.run0.enableSudoAlias;
     };
   };
 }
