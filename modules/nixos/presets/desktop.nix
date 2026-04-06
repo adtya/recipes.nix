@@ -34,7 +34,22 @@ in
       };
     };
 
+    console.useXkbConfig = true;
+
+    environment = {
+      pathsToLink = [ "/share" ];
+      sessionVariables = {
+        NIXOS_OZONE_WL = 1;
+      };
+    };
+
+    gtk.iconCache.enable = true;
+
     hardware.graphics.enable = true;
+
+    i18n = {
+      extraLocales = [ "ml_IN/UTF-8" ];
+    };
 
     programs = {
       command-not-found.enable = false;
@@ -63,6 +78,12 @@ in
       power-profiles-daemon.enable = true;
       udev.enable = true;
       udisks2.enable = true;
+      xserver.xkb = {
+        layout = "us";
+        options = "rupeesign:4";
+        variant = "altgr-intl";
+      };
+
     };
 
     xdg.portal = {
