@@ -1,4 +1,9 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 let
   cfg = config.xyz.adtya.recipes.programs.terminal;
   preset-cfg = config.xyz.adtya.recipes.presets;
@@ -20,8 +25,5 @@ in
     };
   };
 
-  config = lib.mkIf cfg.enable {
-    environment.systemPackages = [ cfg.package ];
-  };
+  config = lib.mkIf cfg.enable { environment.systemPackages = [ cfg.package ]; };
 }
-
