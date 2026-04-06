@@ -1,16 +1,8 @@
 { inputs, ... }:
 {
   imports = [
-    ./boot
-    ./core
-    ./desktop
-    ./misc
-    ./networking
-    ./presets
-    ./programs
-    ./services
-    ./virtualisation
+    inputs.sops-nix.nixosModules.sops
 
-    ./hostinfo.nix
+    ./module.nix
   ];
 }

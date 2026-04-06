@@ -31,7 +31,7 @@ let
   eval = lib.evalModules {
     modules = [
       (_: { _module.check = false; })
-      ./modules/nixos
+      ./modules/nixos/module.nix
     ];
     specialArgs = { inherit pkgs; };
     class = "recipesConfig";
