@@ -47,10 +47,15 @@ in
         bitwarden-cli
         bitwarden-desktop
         btop
+        celluloid
         android-file-transfer
         discord
         file
         localsend
+        (mpv.override {
+          youtubeSupport = true;
+          scripts = with pkgs.mpvScripts; [ mpris ];
+        })
         nvtopPackages.amd
         spotify
         transmission_4-gtk
