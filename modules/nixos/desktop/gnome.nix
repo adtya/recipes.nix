@@ -6,6 +6,7 @@
 }:
 let
   cfg = config.xyz.adtya.recipes.desktop.gnome;
+  terminal-cfg = config.xyz.adtya.recipes.programs.terminal;
   enabled-extensions = with pkgs.gnomeExtensions; [
     appindicator
     caffeine
@@ -64,6 +65,20 @@ in
         {
           lockAll = true;
           settings = {
+            "org/gnome/settings-daemon/plugins/media-keys" = {
+              www = [ "<Super>i" ];
+            };
+            "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+              name = "Terminal";
+              command = lib.getExe terminal-cfg.package;
+              binding = "<Super>Return";
+            };
+            "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
+              name = "Librewolf";
+              command = lib.getExe pkgs.librewolf;
+              binding = "<Shift><Super>i";
+            };
+
             "org/gnome/desktop/interface" = {
               accent-color = "purple";
               color-scheme = "prefer-dark";
