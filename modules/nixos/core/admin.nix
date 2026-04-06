@@ -33,13 +33,6 @@ in
       polkit = {
         enable = true;
         adminIdentities = [ "unix-group:wheel" ];
-        extraConfig = ''
-          polkit.addRule(function(action, subject) {
-            if (subject.isInGroup("wheel")) {
-              return polkit.Result.AUTH_ADMIN_KEEP;
-            }
-          });
-        '';
       };
       sudo = {
         enable = true;
