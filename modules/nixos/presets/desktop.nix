@@ -34,8 +34,6 @@ in
       };
     };
 
-    environment.systemPackages = with pkgs; [ ghostty ];
-
     hardware.graphics.enable = true;
 
     programs = {
