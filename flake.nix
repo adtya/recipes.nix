@@ -12,17 +12,13 @@
       url = "github:nix-community/home-manager?ref=master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixos-hardware.url = "github:NixOS/nixos-hardware";
     disko.url = "github:nix-community/disko?ref=latest";
     impermanence.url = "github:nix-community/impermanence?ref=master";
     lanzaboote.url = "github:nix-community/lanzaboote?ref=master";
     sops-nix.url = "github:Mic92/sops-nix?ref=master";
-    deploy-rs.url = "github:serokell/deploy-rs?ref=master";
     treefmt-nix.url = "github:numtide/treefmt-nix?ref=main";
     neovim-nightly.url = "github:nix-community/neovim-nightly-overlay?ref=master";
     smc-fonts.url = "gitlab:smc/smc-fonts-flake?ref=trunk";
-    adtyaxyz.url = "github:adtya/adtya.xyz?ref=main";
-    wiki.url = "github:adtya/wiki?ref=main";
   };
 
   outputs =
@@ -52,21 +48,17 @@
         })
       );
 
-      devShells = forAllSystems (
+      checks = forAllSystems (
         system:
-        (import ./devshells.nix {
+        (import ./checks.nix {
           pkgs = pkgsFor system;
-          inherit (inputs) deploy-rs;
+          inherit (inputs) treefmt-nix self;
         })
       );
 
-      packages = forAllSystems (
-        system:
-        (import ./packages.nix {
-          pkgs = pkgsFor system;
-          inherit (inputs) nixpkgs;
-        })
-      );
+      devShells = forAllSystems (system: (import ./devshells.nix { pkgs = pkgsFor system; }));
+
+      packages = forAllSystems (system: (import ./packages.nix { pkgs = pkgsFor system; }));
 
       overlays.default = import ./overlays;
       nixosModules.default = import ./modules/nixos;
