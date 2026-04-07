@@ -27,12 +27,6 @@ in
 
     programs = {
       command-not-found.enable = false;
-      neovim = {
-        enable = true;
-        defaultEditor = true;
-        viAlias = true;
-        vimAlias = true;
-      };
     };
 
     systemd = {

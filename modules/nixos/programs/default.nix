@@ -8,5 +8,13 @@ _: {
     ./zsh.nix
   ];
 
-  programs.git.enable = true;
+  programs = {
+    git.enable = true;
+    neovim = {
+      enable = true;
+      defaultEditor = true;
+      viAlias = true;
+      vimAlias = true;
+    };
+  };
 }
