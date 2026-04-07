@@ -8,10 +8,6 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs?ref=nixos-unstable";
-    home-manager = {
-      url = "github:nix-community/home-manager?ref=master";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     disko.url = "github:nix-community/disko?ref=latest";
     impermanence.url = "github:nix-community/impermanence?ref=master";
     lanzaboote.url = "github:nix-community/lanzaboote?ref=master";
@@ -62,7 +58,6 @@
 
       overlays.default = import ./overlays;
       nixosModules.default = import ./modules/nixos;
-      homeManagerModules.default = import ./modules/home-manager;
 
       nixosConfigurations = {
 
