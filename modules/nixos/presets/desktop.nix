@@ -5,7 +5,7 @@
   ...
 }:
 let
-  cfg = config.xyz.adtya.recipes.presets.desktop;
+  cfg = config.xyz.adtya.recipes.presets;
   packages = with pkgs; [
     btop
     celluloid
@@ -46,7 +46,7 @@ in
     };
   };
 
-  config = lib.mkIf cfg {
+  config = lib.mkIf cfg.desktop {
     boot = {
       bootspec.enable = true;
       consoleLogLevel = 3;
@@ -72,8 +72,7 @@ in
       sessionVariables = {
         NIXOS_OZONE_WL = 1;
       };
-      systemPackages = packages;
-      defaultPackages = lib.mkIf (!cfg.desktop-minimal) extra-packages;
+      systemPackages = if cfg.desktop-minimal then packages else (packages ++ extra-packages);
     };
 
     gtk.iconCache.enable = true;
