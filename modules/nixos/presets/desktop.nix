@@ -6,13 +6,45 @@
 }:
 let
   cfg = config.xyz.adtya.recipes.presets.desktop;
+  packages = with pkgs;
+    [
+      btop
+      celluloid
+      file
+      localsend
+      (mpv.override {
+        youtubeSupport = true;
+        scripts = with pkgs.mpvScripts; [ mpris ];
+      })
+      unzip
+      wl-clipboard
+      xdg-utils
+    ];
+  extra-packages = with pkgs;
+    [
+      _1password-cli
+      _1password-gui
+      bitwarden-cli
+      bitwarden-desktop
+      discord
+      spotify
+      transmission_4-gtk
+      android-file-transfer
+    ];
 in
 {
   options = {
-    xyz.adtya.recipes.presets.desktop = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      description = "Enable the desktop preset";
+    xyz.adtya.recipes.presets = {
+      desktop = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "Enable the desktop preset";
+      };
+      desktop-minimal = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "Use a minimal version of the desktop preset";
+      };
     };
   };
 
@@ -29,8 +61,9 @@ in
         "vm.dirty_ratio" = 3;
       };
       loader = {
-        timeout = 0;
+        timeout = 5;
         efi.canTouchEfiVariables = true;
+        systemd-boot.enable = true;
       };
     };
 
@@ -41,28 +74,7 @@ in
       sessionVariables = {
         NIXOS_OZONE_WL = 1;
       };
-      systemPackages = with pkgs; [
-        _1password-cli
-        _1password-gui
-        bitwarden-cli
-        bitwarden-desktop
-        btop
-        celluloid
-        android-file-transfer
-        discord
-        file
-        localsend
-        (mpv.override {
-          youtubeSupport = true;
-          scripts = with pkgs.mpvScripts; [ mpris ];
-        })
-        nvtopPackages.amd
-        spotify
-        transmission_4-gtk
-        unzip
-        wl-clipboard
-        xdg-utils
-      ];
+      systemPackages = packages ++ (if cfg.desktop-minimal then [ ] else extra-packages);
     };
 
     gtk.iconCache.enable = true;
@@ -96,7 +108,6 @@ in
       fwupd.enable = true;
       gnome.gnome-keyring.enable = true;
       gvfs.enable = true;
-      pcscd.enable = true;
       power-profiles-daemon.enable = true;
       udev.enable = true;
       udisks2.enable = true;

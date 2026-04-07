@@ -7,4 +7,6 @@ _: {
     ./terminal.nix
     ./zsh.nix
   ];
+
+  programs.git.enable = true;
 }
