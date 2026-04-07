@@ -6,31 +6,29 @@
 }:
 let
   cfg = config.xyz.adtya.recipes.presets.desktop;
-  packages = with pkgs;
-    [
-      btop
-      celluloid
-      file
-      localsend
-      (mpv.override {
-        youtubeSupport = true;
-        scripts = with pkgs.mpvScripts; [ mpris ];
-      })
-      unzip
-      wl-clipboard
-      xdg-utils
-    ];
-  extra-packages = with pkgs;
-    [
-      _1password-cli
-      _1password-gui
-      bitwarden-cli
-      bitwarden-desktop
-      discord
-      spotify
-      transmission_4-gtk
-      android-file-transfer
-    ];
+  packages = with pkgs; [
+    btop
+    celluloid
+    file
+    localsend
+    (mpv.override {
+      youtubeSupport = true;
+      scripts = with pkgs.mpvScripts; [ mpris ];
+    })
+    unzip
+    wl-clipboard
+    xdg-utils
+  ];
+  extra-packages = with pkgs; [
+    _1password-cli
+    _1password-gui
+    bitwarden-cli
+    bitwarden-desktop
+    discord
+    spotify
+    transmission_4-gtk
+    android-file-transfer
+  ];
 in
 {
   options = {
@@ -74,7 +72,8 @@ in
       sessionVariables = {
         NIXOS_OZONE_WL = 1;
       };
-      systemPackages = packages ++ (if cfg.desktop-minimal then [ ] else extra-packages);
+      systemPackages = packages;
+      defaultPackages = lib.mkIf (!cfg.desktop-minimal) extra-packages;
     };
 
     gtk.iconCache.enable = true;
