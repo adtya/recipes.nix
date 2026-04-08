@@ -22,6 +22,8 @@
     ];
   };
 
+  networking.networkmanager.unmanaged = [ "mac:ac:de:48:00:11:22" ];
+
   xyz.adtya.recipes = {
     boot.plymouth.enable = false;
     hostinfo = {
