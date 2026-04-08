@@ -25,7 +25,8 @@
   networking.networkmanager.unmanaged = [ "mac:ac:de:48:00:11:22" ];
 
   xyz.adtya.recipes = {
-    boot.plymouth.enable = false;
+    boot.plymouth.theme = "rog_2";
+
     hostinfo = {
       host-name = "Gloria";
       tailscale-ip = "100.69.69.3";
