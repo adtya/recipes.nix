@@ -76,6 +76,7 @@
             pkgs = pkgsFor system;
             specialArgs = { inherit inputs primary-user; };
             modules = [
+              (_: { nixpkgs.hostPlatform = system; })
               ./hosts/shared
               ./hosts/gwen
             ];
@@ -85,6 +86,7 @@
             pkgs = pkgsFor system;
             specialArgs = { inherit inputs primary-user; };
             modules = [
+              (_: { nixpkgs.hostPlatform = system; })
               ./hosts/shared
               ./hosts/skipper
             ];
@@ -94,6 +96,7 @@
             pkgs = pkgsFor system;
             specialArgs = { inherit inputs primary-user; };
             modules = [
+              (_: { nixpkgs.hostPlatform = system; })
               ./hosts/shared
               ./hosts/thor
             ];
@@ -103,6 +106,7 @@
             pkgs = pkgsFor system;
             specialArgs = { inherit inputs primary-user; };
             modules = [
+              (_: { nixpkgs.hostPlatform = system; })
               ./hosts/shared
               ./hosts/bifrost
             ];
@@ -112,6 +116,7 @@
             pkgs = pkgsFor system;
             specialArgs = { inherit inputs primary-user; };
             modules = [
+              (_: { nixpkgs.hostPlatform = system; })
               ./hosts/shared
               ./hosts/rico0
             ];
@@ -121,6 +126,7 @@
             pkgs = pkgsFor system;
             specialArgs = { inherit inputs primary-user; };
             modules = [
+              (_: { nixpkgs.hostPlatform = system; })
               ./hosts/shared
               ./hosts/rico1
             ];
@@ -130,6 +136,7 @@
             pkgs = pkgsFor system;
             specialArgs = { inherit inputs primary-user; };
             modules = [
+              (_: { nixpkgs.hostPlatform = system; })
               ./hosts/shared
               ./hosts/rico2
             ];
