@@ -5,7 +5,6 @@
   ...
 }:
 let
-  theme = "hexagon_dots";
   cfg = config.xyz.adtya.recipes.boot.plymouth;
   preset-cfg = config.xyz.adtya.recipes.presets;
 in
@@ -18,6 +17,12 @@ in
         defaultText = lib.literalMD "[config.xyz.adtya.recipes.presets.desktop](#xyzadtyarecipespresetsdesktop)";
         description = "Enable Plymouth";
       };
+      theme = lib.mkOption {
+        type = lib.types.str;
+        default = "hexagon_dots";
+        description = "One of the themes from [here](https://github.com/adi1090x/plymouth-themes)";
+      };
+
     };
   };
 
@@ -25,9 +30,9 @@ in
     boot.plymouth = {
       enable = true;
       themePackages = lib.mkDefault [
-        (pkgs.adi1090x-plymouth-themes.override { selected_themes = [ theme ]; })
+        (pkgs.adi1090x-plymouth-themes.override { selected_themes = [ cfg.theme ]; })
       ];
-      theme = lib.mkDefault theme;
+      theme = lib.mkDefault cfg.theme;
     };
   };
 }
