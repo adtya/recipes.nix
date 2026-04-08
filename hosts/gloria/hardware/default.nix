@@ -57,7 +57,10 @@ in
       "dm-snapshot"
     ];
 
-    kernelParams = [ "amdgpu.dpm=0" ];
+    kernelParams = [
+      "amdgpu.dpm=0"
+      "hid_apple.swap_opt_cmd=1"
+    ];
   };
 
   hardware = {
