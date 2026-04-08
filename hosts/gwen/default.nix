@@ -42,7 +42,10 @@
     };
 
     misc = {
-      gaming.enable = true;
+      gaming = {
+        enable = true;
+        lutris = false;
+      };
     };
 
     networking.wireless = true;

@@ -23,6 +23,11 @@ in
         default = false;
         description = "Enable gaming stuff";
       };
+      lutris = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+        description = "Install Lutris";
+      };
     };
   };
 
@@ -30,8 +35,8 @@ in
     xyz.adtya.recipes.core.users.primary.extra-groups = [ "gamemode" ];
 
     environment = {
-      systemPackages = with pkgs; [
-        (lutris.override {
+      systemPackages = lib.mkIf cfg.lutris [
+        (pkgs.lutris.override {
           extraPkgs = p: [
             p.gamemode
             p.gamescope
@@ -64,7 +69,6 @@ in
           vulkan-tools
           wineWow64Packages.waylandFull
         ];
-        extraCompatPackages = with pkgs; [ proton-ge-bin ];
         localNetworkGameTransfers.openFirewall = true;
         remotePlay.openFirewall = true;
       };
