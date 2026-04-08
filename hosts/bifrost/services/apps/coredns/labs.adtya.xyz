@@ -6,9 +6,10 @@ $TTL    86400
 ns IN A   @tailscaleIP@
 
 rico0           IN CNAME rico0.@tailnetName@.
+ai              IN CNAME rico0
 dns             IN CNAME rico0
 power           IN CNAME rico0
-ai              IN CNAME rico0
+static          IN CNAME rico0
 
 rico1           IN CNAME rico1.@tailnetName@.
 
