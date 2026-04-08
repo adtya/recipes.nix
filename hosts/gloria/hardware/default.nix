@@ -20,7 +20,19 @@ let
     '';
     destination = "/etc/udev/rules.d/61-mutter-preferred-primary-gpu.rules";
   };
+  brcm-firmware = pkgs.stdenvNoCC.mkDerivation (final: {
+    name = "brcm-firmware";
+    src = pkgs.fetchzip {
+      url = "https://static.labs.adtya.xyz/firmware.tar";
+      hash = "sha256-0BBKMXC4WcEI/IH2/JDH7maKwePUlXqDxYoEpOQqdNc=";
+      stripRoot = false;
+    };
 
+    installPhase = ''
+      mkdir -p $out/lib/firmware/
+      cp -ra ${final.src} $out/lib/firmware/brcm
+    '';
+  });
 in
 
 {
@@ -64,6 +76,7 @@ in
   };
 
   hardware = {
+    firmware = [ brcm-firmware ];
     graphics = {
       extraPackages = with pkgs; [
         intel-media-driver
