@@ -8,7 +8,6 @@
 let
   cfg = config.xyz.adtya.recipes.misc.devtools;
   user-cfg = config.xyz.adtya.recipes.core.users;
-  inherit (pkgs.stdenv.hostPlatform) system;
 in
 {
   options = {
@@ -83,7 +82,6 @@ in
       lazygit.enable = true;
       neovim = {
         enable = true;
-        package = inputs.neovim-nightly.packages.${system}.default;
         defaultEditor = true;
         viAlias = true;
         vimAlias = true;

@@ -10,7 +10,6 @@
     disko.url = "github:nix-community/disko?ref=latest";
     jovian.url = "github:Jovian-Experiments/Jovian-NixOS?ref=development";
     lanzaboote.url = "github:nix-community/lanzaboote?ref=master";
-    neovim-nightly.url = "github:nix-community/neovim-nightly-overlay?ref=master";
     nixpkgs.url = "github:NixOS/nixpkgs?ref=nixos-unstable";
     smc-fonts.url = "gitlab:smc/smc-fonts-flake?ref=trunk";
     sops-nix.url = "github:Mic92/sops-nix?ref=master";
