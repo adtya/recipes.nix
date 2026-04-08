@@ -5,9 +5,7 @@
   ...
 }:
 {
-  imports = [
-    ./hardware
-  ];
+  imports = [ ./hardware ];
 
   nix.settings = {
     extra-substituters = [
@@ -24,13 +22,8 @@
     ];
   };
 
-  boot = {
-    loader.systemd-boot = {
-      consoleMode = "5";
-    };
-  };
-
   xyz.adtya.recipes = {
+    boot.plymouth.enable = false;
     hostinfo = {
       host-name = "Gloria";
       tailscale-ip = "100.69.69.3";
@@ -47,7 +40,7 @@
 
     misc.devtools.enable = true;
 
-    networking.wireless = true;
+    networking.wireless = false;
 
     presets = {
       desktop = true;

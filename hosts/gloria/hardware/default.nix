@@ -28,10 +28,21 @@
       ];
     };
 
-    kernelModules = [ "kvm-intel" ];
+    kernelModules = [
+      "kvm-intel"
+      "i915"
+      "dm-snapshot"
+    ];
   };
 
   hardware = {
+    graphics = {
+      extraPackages = with pkgs; [
+        intel-media-driver
+        vpl-gpu-rt
+        libvdpau-va-gl
+      ];
+    };
     cpu.intel.updateMicrocode = true;
     enableRedistributableFirmware = true;
   };
