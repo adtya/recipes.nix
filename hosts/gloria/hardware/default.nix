@@ -76,6 +76,7 @@ in
   };
 
   hardware = {
+    bluetooth.powerOnBoot = false;
     firmware = [ brcm-firmware ];
     graphics = {
       extraPackages = with pkgs; [
