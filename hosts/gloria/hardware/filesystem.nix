@@ -23,36 +23,45 @@
               mountOptions = [ "umask=0077" ];
             };
           };
-          SYSTEM = {
+          CRYPT = {
             size = "100%";
             content = {
-              type = "btrfs";
-              mountpoint = "/mnt/system";
-              mountOptions = [
-                "compress=zstd"
-                "relatime"
-              ];
-              subvolumes = {
-                "@root" = {
-                  mountpoint = "/";
-                  mountOptions = [
-                    "compress=zstd"
-                    "relatime"
-                  ];
-                };
-                "@nix" = {
-                  mountpoint = "/nix";
-                  mountOptions = [
-                    "compress=zstd"
-                    "relatime"
-                  ];
-                };
-                "@persist" = {
-                  mountpoint = "/persist";
-                  mountOptions = [
-                    "compress=zstd"
-                    "relatime"
-                  ];
+              type = "luks";
+              name = "${config.networking.hostName}-ROOT";
+              settings = {
+                allowDiscards = true;
+                bypassWorkqueues = true;
+              };
+              initrdUnlock = true;
+              content = {
+                type = "btrfs";
+                mountpoint = "/mnt/system";
+                mountOptions = [
+                  "compress=zstd"
+                  "relatime"
+                ];
+                subvolumes = {
+                  "@root" = {
+                    mountpoint = "/";
+                    mountOptions = [
+                      "compress=zstd"
+                      "relatime"
+                    ];
+                  };
+                  "@nix" = {
+                    mountpoint = "/nix";
+                    mountOptions = [
+                      "compress=zstd"
+                      "relatime"
+                    ];
+                  };
+                  "@persist" = {
+                    mountpoint = "/persist";
+                    mountOptions = [
+                      "compress=zstd"
+                      "relatime"
+                    ];
+                  };
                 };
               };
             };
