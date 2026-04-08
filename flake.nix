@@ -7,14 +7,18 @@
   };
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs?ref=nixos-unstable";
     disko.url = "github:nix-community/disko?ref=latest";
-    impermanence.url = "github:nix-community/impermanence?ref=master";
+    jovian.url = "github:Jovian-Experiments/Jovian-NixOS?ref=development";
     lanzaboote.url = "github:nix-community/lanzaboote?ref=master";
+    neovim-nightly.url = "github:nix-community/neovim-nightly-overlay?ref=master";
+    nixpkgs.url = "github:NixOS/nixpkgs?ref=nixos-unstable";
+    smc-fonts.url = "gitlab:smc/smc-fonts-flake?ref=trunk";
     sops-nix.url = "github:Mic92/sops-nix?ref=master";
     treefmt-nix.url = "github:numtide/treefmt-nix?ref=main";
-    neovim-nightly.url = "github:nix-community/neovim-nightly-overlay?ref=master";
-    smc-fonts.url = "gitlab:smc/smc-fonts-flake?ref=trunk";
+
+    adtyaxyz.url = "git+https://codeberg.org/adtya/adtya.xyz?ref=main";
+    wiki.url = "git+https://codeberg.org/adtya/wiki?ref=main";
+    the-power-button.url = "git+https://codeberg.org/adtya/the-power-button?ref=main";
   };
 
   outputs =
@@ -59,9 +63,78 @@
       overlays.default = import ./overlays;
       nixosModules.default = import ./modules/nixos;
 
-      nixosConfigurations = {
-
-      };
-
+      nixosConfigurations =
+        let
+          primary-user = {
+            name = "adtya";
+            long-name = "Adithya Nair";
+            email = "adtya@adtya.xyz";
+          };
+        in
+        {
+          Gwen = lib.nixosSystem rec {
+            system = "x86_64-linux";
+            pkgs = pkgsFor system;
+            specialArgs = { inherit inputs primary-user; };
+            modules = [
+              ./hosts/shared
+              ./hosts/gwen
+            ];
+          };
+          Skipper = lib.nixosSystem rec {
+            system = "x86_64-linux";
+            pkgs = pkgsFor system;
+            specialArgs = { inherit inputs primary-user; };
+            modules = [
+              ./hosts/shared
+              ./hosts/skipper
+            ];
+          };
+          Thor = lib.nixosSystem rec {
+            system = "x86_64-linux";
+            pkgs = pkgsFor system;
+            specialArgs = { inherit inputs primary-user; };
+            modules = [
+              ./hosts/shared
+              ./hosts/thor
+            ];
+          };
+          Bifrost = lib.nixosSystem rec {
+            system = "x86_64-linux";
+            pkgs = pkgsFor system;
+            specialArgs = { inherit inputs primary-user; };
+            modules = [
+              ./hosts/shared
+              ./hosts/bifrost
+            ];
+          };
+          Rico0 = lib.nixosSystem rec {
+            system = "aarch64-linux";
+            pkgs = pkgsFor system;
+            specialArgs = { inherit inputs primary-user; };
+            modules = [
+              ./hosts/shared
+              ./hosts/rico0
+            ];
+          };
+          Rico1 = lib.nixosSystem rec {
+            system = "aarch64-linux";
+            pkgs = pkgsFor system;
+            specialArgs = { inherit inputs primary-user; };
+            modules = [
+              ./hosts/shared
+              ./hosts/rico1
+            ];
+          };
+          Rico2 = lib.nixosSystem rec {
+            system = "aarch64-linux";
+            pkgs = pkgsFor system;
+            specialArgs = { inherit inputs primary-user; };
+            modules = [
+              ./hosts/shared
+              ./hosts/rico2
+            ];
+          };
+        };
     };
 }

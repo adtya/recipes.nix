@@ -1,0 +1,55 @@
+{
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
+{
+  imports = [
+    ./hardware
+    ./jovian.nix
+  ];
+
+  boot = {
+    loader.systemd-boot = {
+      consoleMode = "5";
+    };
+  };
+
+  environment = {
+    sessionVariables = {
+      AMD_VULKAN_ICD = "RADV";
+      MESA_SHADER_CACHE_MAX_SIZE = "12G";
+    };
+
+    systemPackages = with pkgs; [ nvtopPackages.amd ];
+  };
+
+  xyz.adtya.recipes = {
+    hostinfo = {
+      host-name = "Gwen";
+      tailscale-ip = "100.69.69.5";
+    };
+
+    core = {
+      nix.use-nh = true;
+    };
+
+    desktop = {
+      gnome.enable = true;
+    };
+
+    misc = {
+      gaming.enable = true;
+    };
+
+    networking.wireless = true;
+
+    presets = {
+      desktop = true;
+      desktop-minimal = true;
+    };
+  };
+
+  system.stateVersion = "26.05";
+}
