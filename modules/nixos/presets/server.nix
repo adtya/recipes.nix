@@ -19,10 +19,15 @@ in
   config = lib.mkIf cfg {
     xyz.adtya.recipes.core.admin.needs-password = false;
 
+    boot = {
+      loader.timeout = 0;
+    };
+
     environment.systemPackages = with pkgs; [
       age
       sops
     ];
+
     powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
 
     programs = {

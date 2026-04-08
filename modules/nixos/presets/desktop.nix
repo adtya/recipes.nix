@@ -49,20 +49,8 @@ in
   config = lib.mkIf cfg.desktop {
     boot = {
       bootspec.enable = true;
-      consoleLogLevel = 3;
-      initrd = {
-        systemd.enable = true;
-        verbose = false;
-      };
+      initrd.verbose = false;
       kernelParams = [ "quiet" ];
-      kernel.sysctl = {
-        "vm.dirty_ratio" = 3;
-      };
-      loader = {
-        timeout = 5;
-        efi.canTouchEfiVariables = true;
-        systemd-boot.enable = true;
-      };
     };
 
     console.useXkbConfig = true;
