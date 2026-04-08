@@ -4,6 +4,7 @@
     ./boot
     ./core
     ./desktop
+    ./hardware
     ./misc
     ./networking
     ./presets
