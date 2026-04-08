@@ -25,6 +25,7 @@ let
     };
   };
   desktopPreset = {
+    xyz.adtya.recipes.core.users.primary.extra-groups = [ "networkmanager" ];
     networking = {
       networkmanager = {
         enable = true;
