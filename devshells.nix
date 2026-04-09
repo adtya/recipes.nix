@@ -2,12 +2,14 @@
 {
   default = pkgs.mkShell {
     buildInputs = with pkgs; [
-      age
       git
+      age
       sops
       ssh-to-age
       nil
       mdbook
+      disko
+      nurl
     ];
   };
 }
