@@ -14,4 +14,17 @@ _final: prev: {
     plugins = [ "github.com/caddy-dns/hetzner/v2@v2.0.0-preview-3" ];
     hash = "sha256-qLsfK9zaZMGVtpHHmsAkK3dgXR+4NKKz2vk9h+1G/64=";
   };
+
+  bolt = prev.bolt.overrideAttrs (
+    finalAttrs: _prevAttrs: {
+      version = "0.9.11";
+      src = prev.fetchFromGitLab {
+        domain = "gitlab.freedesktop.org";
+        owner = "bolt";
+        repo = "bolt";
+        tag = finalAttrs.version;
+        hash = "sha256-nm6Qme6alKVm4En3XqG08Bugu2/NjiP/F7z7iuzDGzA=";
+      };
+    }
+  );
 }
