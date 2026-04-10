@@ -3,7 +3,7 @@
     disko.url = "github:nix-community/disko?ref=latest";
     jovian.url = "github:Jovian-Experiments/Jovian-NixOS?ref=development";
     lanzaboote.url = "github:nix-community/lanzaboote?ref=master";
-    nixos-hardware.url = "github:NixOS/nixos-hardware?ref=master";
+    nixos-hardware.url = "github:adtya/nixos-hardware?ref=master";
     nixpkgs.url = "github:NixOS/nixpkgs?ref=nixos-unstable";
     smc-fonts.url = "gitlab:smc/smc-fonts-flake?ref=trunk";
     sops-nix.url = "github:Mic92/sops-nix?ref=master";
