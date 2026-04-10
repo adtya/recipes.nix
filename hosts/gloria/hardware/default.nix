@@ -47,10 +47,15 @@ in
     kernelChannel = "latest";
   };
 
-  services.udev.packages = [
-    amdgpu-pm
-    mutter-preferred-primary-gpu
-  ];
+  services = {
+    mbpfan = {
+      enable = true;
+    };
+    udev.packages = [
+      amdgpu-pm
+      mutter-preferred-primary-gpu
+    ];
+  };
 
   boot = {
     initrd = {
