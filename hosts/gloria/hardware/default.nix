@@ -80,6 +80,7 @@ in
     kernelParams = [
       "amdgpu.dpm=0"
       "hid_apple.swap_opt_cmd=1"
+      "i915.enable_guc=3"
     ];
   };
 
