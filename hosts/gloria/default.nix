@@ -22,8 +22,6 @@
     ];
   };
 
-  networking.networkmanager.unmanaged = [ "mac:ac:de:48:00:11:22" ];
-
   xyz.adtya.recipes = {
     boot.plymouth.theme = "rog_2";
 
@@ -47,6 +45,25 @@
 
     presets = {
       desktop = true;
+    };
+  };
+
+  networking.networkmanager.unmanaged = [ "mac:ac:de:48:00:11:22" ];
+
+  services = {
+    thermald.enable = true;
+    auto-cpufreq = {
+      enable = false;
+      settings = {
+        battery = {
+          governor = "powersave";
+          turbo = "never";
+        };
+        charger = {
+          governor = "performance";
+          turbo = "auto";
+        };
+      };
     };
   };
 
