@@ -58,6 +58,9 @@ in
   };
 
   boot = {
+    extraModprobeConfig = ''
+      options hid-appletb-kbd mode=1
+    '';
     initrd = {
       availableKernelModules = [
         "xhci_pci"
@@ -81,6 +84,12 @@ in
   };
 
   hardware = {
+    apple.touchBar = {
+      enable = true;
+      settings = {
+        MediaLayerDefault = false;
+      };
+    };
     bluetooth.powerOnBoot = false;
     firmware = [ brcm-firmware ];
     graphics = {
