@@ -23,7 +23,7 @@
   };
 
   xyz.adtya.recipes = {
-    boot.plymouth.theme = "rog_2";
+    boot.plymouth.theme = "owl";
 
     hostinfo = {
       host-name = "Gloria";

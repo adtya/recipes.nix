@@ -9,6 +9,8 @@
     sops-nix.url = "github:Mic92/sops-nix?ref=master";
     treefmt-nix.url = "github:numtide/treefmt-nix?ref=main";
 
+    tranquil-pds.url = "git+https://tangled.org/tranquil.farm/tranquil-pds";
+
     adtyaxyz.url = "git+https://codeberg.org/adtya/adtya.xyz?ref=main";
     wiki.url = "git+https://codeberg.org/adtya/wiki?ref=main";
     the-power-button.url = "git+https://codeberg.org/adtya/the-power-button?ref=main";

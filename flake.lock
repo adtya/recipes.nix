@@ -206,6 +206,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-fetch-deno": {
+      "locked": {
+        "lastModified": 1766410835,
+        "narHash": "sha256-dRhVt0aFDyTqppyzRLxiO1JZEAoIA2fUnaeyJTe+UwU=",
+        "owner": "aMOPel",
+        "repo": "nixpkgs",
+        "rev": "c9801acc8c4fac6377d076bc1c102b15bd9cfa6f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "aMOPel",
+        "ref": "feat/fetchDenoDeps",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs_10": {
       "locked": {
         "lastModified": 1770107345,
@@ -224,6 +240,22 @@
     },
     "nixpkgs_11": {
       "locked": {
+        "lastModified": 1766314097,
+        "narHash": "sha256-laJftWbghBehazn/zxVJ8NdENVgjccsWAdAqKXhErrM=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "306ea70f9eb0fb4e040f8540e2deab32ed7e2055",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_12": {
+      "locked": {
         "lastModified": 1770107345,
         "narHash": "sha256-tbS0Ebx2PiA1FRW8mt8oejR0qMXmziJmPaU1d4kYY9g=",
         "owner": "nixos",
@@ -238,7 +270,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_12": {
+    "nixpkgs_13": {
       "locked": {
         "lastModified": 1774273680,
         "narHash": "sha256-a++tZ1RQsDb1I0NHrFwdGuRlR5TORvCEUksM459wKUA=",
@@ -254,7 +286,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_13": {
+    "nixpkgs_14": {
       "locked": {
         "lastModified": 1770107345,
         "narHash": "sha256-tbS0Ebx2PiA1FRW8mt8oejR0qMXmziJmPaU1d4kYY9g=",
@@ -432,6 +464,7 @@
         "smc-fonts": "smc-fonts",
         "sops-nix": "sops-nix",
         "the-power-button": "the-power-button",
+        "tranquil-pds": "tranquil-pds",
         "treefmt-nix": "treefmt-nix_3",
         "wiki": "wiki"
       }
@@ -531,6 +564,25 @@
         "url": "https://codeberg.org/adtya/the-power-button"
       }
     },
+    "tranquil-pds": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_11",
+        "nixpkgs-fetch-deno": "nixpkgs-fetch-deno"
+      },
+      "locked": {
+        "lastModified": 1775818667,
+        "narHash": "sha256-BW15dKGAf/xjunkg/wbqGTor4a9LZ43D/ef3sMUlXak=",
+        "ref": "refs/heads/main",
+        "rev": "05246aec585ea58f6e17409b528c651d0467ea74",
+        "revCount": 281,
+        "type": "git",
+        "url": "https://tangled.org/tranquil.farm/tranquil-pds"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://tangled.org/tranquil.farm/tranquil-pds"
+      }
+    },
     "treefmt-nix": {
       "inputs": {
         "nixpkgs": "nixpkgs_2"
@@ -571,7 +623,7 @@
     },
     "treefmt-nix_3": {
       "inputs": {
-        "nixpkgs": "nixpkgs_11"
+        "nixpkgs": "nixpkgs_12"
       },
       "locked": {
         "lastModified": 1775125835,
@@ -590,7 +642,7 @@
     },
     "treefmt-nix_4": {
       "inputs": {
-        "nixpkgs": "nixpkgs_13"
+        "nixpkgs": "nixpkgs_14"
       },
       "locked": {
         "lastModified": 1773297127,
@@ -609,7 +661,7 @@
     },
     "wiki": {
       "inputs": {
-        "nixpkgs": "nixpkgs_12",
+        "nixpkgs": "nixpkgs_13",
         "treefmt-nix": "treefmt-nix_4"
       },
       "locked": {

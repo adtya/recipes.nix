@@ -1,5 +1,9 @@
 _: {
-  imports = [ ./filesystem.nix ];
+  imports = [
+    ./filesystem.nix
+
+    ./services
+  ];
 
   xyz.adtya.recipes = {
     hardware.pi4 = true;
