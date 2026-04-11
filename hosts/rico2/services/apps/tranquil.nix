@@ -19,7 +19,7 @@ let
       url = "postgresql:///tranquil?host=/run/postgresql";
     };
   };
-  tranquil-config-file = toml.generate "tranquil-pds.toml" cfg.tranquil-config;
+  tranquil-config-file = toml.generate "tranquil-pds.toml" tranquil-config;
 in
 {
   sops = {
