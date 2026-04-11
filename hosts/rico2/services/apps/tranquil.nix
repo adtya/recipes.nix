@@ -9,7 +9,17 @@ let
   inherit (pkgs.stdenv.hostPlatform) system;
   toml = pkgs.formats.toml { };
   tranquil-pds = lib.getExe inputs.tranquil-pds.package.${system}.default;
-  tranquil-config-file = toml.generate "tranquil-pds.toml" cfg.settings;
+  tranquil-config = {
+    server = {
+      hostname = "pds.ironyofprivacy.org";
+      host = config.xyz.adtya.recipes.hostinfo.tailscale-ip;
+
+    };
+    database = {
+      url = "postgresql:///tranquil?host=/run/postgresql";
+    };
+  };
+  tranquil-config-file = toml.generate "tranquil-pds.toml" cfg.tranquil-config;
 in
 {
   sops = {
