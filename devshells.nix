@@ -2,6 +2,7 @@
 {
   default = pkgs.mkShell {
     buildInputs = with pkgs; [
+      dnscontrol
       git
       age
       sops
