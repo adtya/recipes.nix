@@ -8,7 +8,7 @@
 let
   inherit (pkgs.stdenv.hostPlatform) system;
   toml = pkgs.formats.toml { };
-  tranquil-pds = lib.getExe inputs.tranquil-pds.package.${system}.default;
+  tranquil-pds = lib.getExe inputs.tranquil-pds.packages.${system}.default;
   tranquil-config = {
     server = {
       hostname = "pds.ironyofprivacy.org";
