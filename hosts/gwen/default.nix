@@ -16,6 +16,8 @@
     };
   };
 
+  networking.firewall.enable = false;
+
   environment = {
     sessionVariables = {
       AMD_VULKAN_ICD = "RADV";
