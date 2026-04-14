@@ -11,7 +11,7 @@ let
   tranquil-pds = lib.getExe inputs.tranquil-pds.packages.${system}.default;
   tranquil-config = {
     server = {
-      hostname = "pds.ironyofprivacy.org";
+      hostname = "at.ironyofprivacy.org";
       host = config.xyz.adtya.recipes.hostinfo.tailscale-ip;
 
     };

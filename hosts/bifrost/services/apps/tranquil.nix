@@ -1,7 +1,7 @@
 { inputs, ... }:
 let
   inherit (pkgs.stdenv.hostPlatform) system;
-  domainName = "pds.ironyofprivacy.org";
+  domainName = "at.ironyofprivacy.org";
 in
 {
   services = {
