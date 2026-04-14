@@ -32,6 +32,10 @@ in
 
     programs = {
       command-not-found.enable = false;
+      tmux = {
+        enable = true;
+        terminal = "tmux-256color";
+      };
     };
 
     systemd = {
