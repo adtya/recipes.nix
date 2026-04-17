@@ -12,8 +12,9 @@ in
 
 {
   imports = [
+    ./hyprland
+
     ./gnome.nix
-    ./hyprland.nix
   ];
 
   options = {
