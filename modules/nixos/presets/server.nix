@@ -26,6 +26,7 @@ in
     environment.systemPackages = with pkgs; [
       age
       sops
+      zellij
     ];
 
     powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
