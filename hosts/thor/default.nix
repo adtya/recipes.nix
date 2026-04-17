@@ -57,6 +57,7 @@
     desktop = {
       dm.flavour = "gdm";
       gnome.enable = true;
+      hyprland.enable = true;
     };
 
     misc = {
