@@ -43,11 +43,25 @@ in
           default = [ "wheel" ];
           description = "Extra groups the user should be added to";
         };
+        home = lib.mkOption {
+          type = lib.types.path;
+          default = config.users.users.${cfg.primary.name}.home;
+          readOnly = true;
+          defaultText = lib.literalMD "[config.users.users.\${config.xyz.adtya.recipes.core.users.primary.name}.home](https://search.nixos.org/options?channel=unstable&include_modular_service_options=1&include_nixos_options=1&query=users.users.%3Cname%3E.home&show=option:users.users.%3Cname%3E.home&sort=alpha_asc)";
+          description = "Path to the user's home directory";
+        };
+        group = lib.mkOption {
+          type = lib.types.str;
+          default = config.users.users.${cfg.primary.name}.group;
+          readOnly = true;
+          defaultText = lib.literalMD "[config.users.users.\${config.xyz.adtya.recipes.core.users.primary.name}.group](https://search.nixos.org/options?channel=unstable&include_modular_service_options=1&include_nixos_options=1&query=users.users.%3Cname%3E.group&show=option:users.users.%3Cname%3E.group&sort=alpha_asc)";
+          description = "User's primary group";
+        };
         allowed-ssh-keys = lib.mkOption {
           type = lib.types.listOf lib.types.str;
           default = [ ];
           example = [ "ssh-ed25519 blah blah" ];
-          description = "List of ssh public keys that can log-in as this user";
+          description = "List of ssh public keys that can log-in as the primary user";
         };
       };
     };
