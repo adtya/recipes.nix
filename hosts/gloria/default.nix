@@ -52,6 +52,22 @@
               }
             }
 
+            monitorv2 {
+              output = eDP-1
+              mode = preferred
+              position = 0x0
+              scale = 1.5
+              transform = 0
+            }
+
+            monitorv2 {
+              output = *
+              mode = preferred
+              position = auto-right
+              scale = 1
+              transform = 0
+            }
+
             gesture = 3, horizontal, workspace
 
             binde = ,XF86MonBrightnessUp,   exec, ${brightnessctl} --quiet --device=gmux_backlight set +5%
