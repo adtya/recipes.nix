@@ -5,6 +5,12 @@ let
 
   hyprland-pkg = pkgs.hyprland;
   xdph-pkg = pkgs.xdg-desktop-portal-hyprland;
+
+  hyprland-extra-conf = pkgs.writeTextFile {
+    name = "hyprland-extra.conf";
+    text = cfg.extraConfig;
+  };
+
   hyprland-conf = pkgs.replaceVars ./hyprland.conf {
     blueman = lib.getExe' pkgs.blueman "blueman-manager";
 	  firefox = lib.getExe config.programs.firefox.package;
@@ -20,6 +26,8 @@ let
 	  systemctl = lib.getExe' pkgs.systemd "systemctl";
     power-menu = "/dev/null";
 
+    extra-config = if cfg.extraConfig != "" then "source ${hyprland-extra-conf}" else "";
+
     # wireplumber uses @..@ to specify default sink. setting null so it's ignored by replaceVars
     DEFAULT_AUDIO_SINK = null;
   };
@@ -32,6 +40,11 @@ in
         type = lib.types.bool;
         default = false;
         description = "Enable Hyprland";
+      };
+      extraConfig = lib.mkOption {
+        type = lib.types.str;
+        default = "";
+        description = "Additional hyprland configuration that will be added to the default config";
       };
     };
   };
