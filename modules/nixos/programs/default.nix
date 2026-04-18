@@ -1,10 +1,10 @@
 _: {
   imports = [
     ./firefox
+    ./ghostty
 
     ./fonts.nix
     ./starship.nix
-    ./terminal.nix
     ./zsh.nix
   ];
 
