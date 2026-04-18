@@ -36,7 +36,28 @@
 
     desktop = {
       dm.flavour = "cosmic";
-      hyprland.enable = true;
+      hyprland = {
+        enable = true;
+        extraConfig = let
+          brightnessctl = lib.getExe pkgs.brightnessctl;
+        in ''
+          input {
+              touchpad {
+              clickfinger_behavior = true
+              disable_while_typing = true
+              natural_scroll = true
+              tap-to-click = true
+            }
+          }
+
+          gestures {
+            workspace_swipe = on
+          }
+
+          binde = ",XF86MonBrightnessUp,   exec, ${brightnessctl} --quiet --device=gmux_backlight set +5%"
+          binde = ",XF86MonBrightnessDown, exec, ${brightnessctl} --quiet --device=gmux_backlight set 5%-"
+        '';
+      };
     };
 
     misc.devtools.enable = true;
