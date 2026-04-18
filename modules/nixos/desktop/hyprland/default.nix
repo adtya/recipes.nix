@@ -6,18 +6,22 @@ let
   hyprland-pkg = pkgs.hyprland;
   xdph-pkg = pkgs.xdg-desktop-portal-hyprland;
   hyprland-conf = pkgs.replaceVars ./hyprland.conf {
-    blueberry = lib.getExe' pkgs.blueberry "blueberry";
-	  firefox = lib.getExe config.programs.firefox.finalPackage;
+    blueman = lib.getExe' pkgs.blueman "blueman-manager";
+	  firefox = lib.getExe config.programs.firefox.package;
 	  grimblast = lib.getExe pkgs.grimblast;
 	  hyprctl = lib.getExe' hyprland-pkg "hyprctl";
-	  ghostty = lib.getExe config.xyz.adtya.programs.terminal.package;
+	  ghostty = lib.getExe config.xyz.adtya.recipes.programs.terminal.package;
 	  librewolf = lib.getExe pkgs.librewolf;
 	  loginctl = lib.getExe' pkgs.systemd "loginctl";
 	  playerctl = lib.getExe pkgs.playerctl;
-	  rofi = lib.getExe config.programs.rofi.package;
+	  rofi = lib.getExe pkgs.rofi;
 	  wpctl = lib.getExe' pkgs.wireplumber "wpctl";
 	  yazi = lib.getExe pkgs.yazi;
 	  systemctl = lib.getExe' pkgs.systemd "systemctl";
+    power-menu = "/dev/null";
+
+    # wireplumber uses @..@ to specify default sink. setting null so it's ignored by replaceVars
+    DEFAULT_AUDIO_SINK = null;
   };
 in
 
@@ -35,40 +39,42 @@ in
   config = lib.mkIf cfg.enable {
     systemd.tmpfiles.rules = [
       "d  ${user-cfg.home}/.config/hypr               0755 ${user-cfg.name} ${user-cfg.group} - -"
-      "C+ ${user-cfg.home}/.config/hypr/hyprland.conf -    -                -                 - ${hyprland-conf}"
+      "L+ ${user-cfg.home}/.config/hypr/hyprland.conf -    -                -                 - ${hyprland-conf}"
     ];
+
+    programs.hyprland.enable = true;
 
     services.displayManager.sessionPackages = [hyprland-pkg];
 
     environment.systemPackages = [
-	    pkgs.dracula-theme
-	    pkgs.dracula-icon-theme
-	    pkgs.adwaita-icon-theme
-	    pkgs.gnome-themes-extra
-	  ];
+      pkgs.dracula-theme
+      pkgs.dracula-icon-theme
+      pkgs.adwaita-icon-theme
+      pkgs.gnome-themes-extra
+    ];
 
     xdg.portal = {
       extraPortals = [
         xdph-pkg
-	      pkgs.xdg-desktop-portal-gtk
-	    ];
-	    config = {
-	      common = {
-	        default = [
-	          "gtk"
-	          "*"
-	        ];
-	        "org.freedesktop.impl.portal.Secret" = [ "gnome-keyring" ];
-	        "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
-	      };
-	      Hyprland = {
-	        default = [
-	          "gtk"
-	          "Hyprland"
-	          "*"
-	        ];
-	      };
-	    };
+        pkgs.xdg-desktop-portal-gtk
+      ];
+      config = {
+        common = {
+          default = [
+            "gtk"
+            "*"
+          ];
+          "org.freedesktop.impl.portal.Secret" = [ "gnome-keyring" ];
+          "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
+        };
+        Hyprland = {
+          default = [
+            "gtk"
+            "Hyprland"
+            "*"
+          ];
+        };
+      };
     };
   };
 }
