@@ -1,6 +1,13 @@
 _: {
   projectRootFile = "flake.nix";
   programs = {
+    jsonfmt = {
+      enable = true;
+      includes = [
+        "*.json"
+        "*.jsonc"
+      ];
+    };
     shellcheck.enable = true;
     shfmt.enable = true;
     deadnix = {
