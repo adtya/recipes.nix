@@ -1,4 +1,9 @@
-{ lib, pkgs, config, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 let
   cfg = config.xyz.adtya.recipes.desktop.hyprland;
   user-cfg = config.xyz.adtya.recipes.core.users.primary;
@@ -13,17 +18,17 @@ let
 
   hyprland-conf = pkgs.replaceVars ./hyprland.conf {
     blueman = lib.getExe' pkgs.blueman "blueman-manager";
-	  firefox = lib.getExe config.programs.firefox.package;
-	  grimblast = lib.getExe pkgs.grimblast;
-	  hyprctl = lib.getExe' hyprland-pkg "hyprctl";
-	  ghostty = lib.getExe config.xyz.adtya.recipes.programs.terminal.package;
-	  librewolf = lib.getExe pkgs.librewolf;
-	  loginctl = lib.getExe' pkgs.systemd "loginctl";
-	  playerctl = lib.getExe pkgs.playerctl;
-	  rofi = lib.getExe pkgs.rofi;
-	  wpctl = lib.getExe' pkgs.wireplumber "wpctl";
-	  yazi = lib.getExe pkgs.yazi;
-	  systemctl = lib.getExe' pkgs.systemd "systemctl";
+    firefox = lib.getExe config.programs.firefox.package;
+    grimblast = lib.getExe pkgs.grimblast;
+    hyprctl = lib.getExe' hyprland-pkg "hyprctl";
+    ghostty = lib.getExe config.xyz.adtya.recipes.programs.terminal.package;
+    librewolf = lib.getExe pkgs.librewolf;
+    loginctl = lib.getExe' pkgs.systemd "loginctl";
+    playerctl = lib.getExe pkgs.playerctl;
+    rofi = lib.getExe pkgs.rofi;
+    wpctl = lib.getExe' pkgs.wireplumber "wpctl";
+    yazi = lib.getExe pkgs.yazi;
+    systemctl = lib.getExe' pkgs.systemd "systemctl";
     power-menu = "/dev/null";
 
     extra-config = if cfg.extraConfig != "" then "source ${hyprland-extra-conf}" else "";
@@ -57,7 +62,7 @@ in
 
     programs.hyprland.enable = true;
 
-    services.displayManager.sessionPackages = [hyprland-pkg];
+    services.displayManager.sessionPackages = [ hyprland-pkg ];
 
     environment.systemPackages = [
       pkgs.dracula-theme
