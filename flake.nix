@@ -56,7 +56,7 @@
       packages = forAllSystems (system: (import ./packages.nix { pkgs = pkgsFor system; }));
 
       overlays.default = import ./overlays;
-      nixosModules.default = import ./modules/nixos;
+      nixosModules.default = import ./modules;
 
       nixosConfigurations =
         let
