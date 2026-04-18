@@ -31,7 +31,7 @@ let
     systemctl = lib.getExe' pkgs.systemd "systemctl";
     power-menu = "/dev/null";
 
-    extra-config = if cfg.extraConfig != "" then "source ${hyprland-extra-conf}" else "";
+    extra-config = if cfg.extraConfig != "" then "source = ${hyprland-extra-conf}" else "";
 
     # wireplumber uses @..@ to specify default sink. setting null so it's ignored by replaceVars
     DEFAULT_AUDIO_SINK = null;
