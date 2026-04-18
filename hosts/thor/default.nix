@@ -55,9 +55,28 @@
     };
 
     desktop = {
-      dm.flavour = "gdm";
-      gnome.enable = true;
-      hyprland.enable = true;
+      dm.flavour = "cosmic";
+      hyprland = {
+        enable = true;
+        extraConfig = ''
+          settings {
+            render.cm_auto_hdr = 2
+            misc.vrr = 2
+          }
+
+          monitorv2 {
+            output = DP-1
+            mode = 3440x1440@175
+            position = 0x0
+            scale = auto
+            transform = 0
+            vrr = 2
+            supports_wide_color = 1
+            supports_hdr = 1
+            bitdepth = 10
+          }
+        '';
+      };
     };
 
     misc = {
