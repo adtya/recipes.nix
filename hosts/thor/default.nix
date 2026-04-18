@@ -59,9 +59,12 @@
       hyprland = {
         enable = true;
         extraConfig = ''
-          settings {
-            render.cm_auto_hdr = 2
-            misc.vrr = 2
+          render {
+            cm_auto_hdr = 2
+          }
+
+          misc {
+            vrr = 2
           }
 
           monitorv2 {
