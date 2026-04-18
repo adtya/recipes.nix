@@ -35,8 +35,8 @@
     };
 
     desktop = {
-      dm.flavour = "gdm";
-      gnome.enable = true;
+      dm.flavour = "cosmic";
+      hyprland.enable = true;
     };
 
     misc.devtools.enable = true;
