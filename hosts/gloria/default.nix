@@ -42,7 +42,7 @@
           brightnessctl = lib.getExe pkgs.brightnessctl;
         in ''
           input {
-              touchpad {
+            touchpad {
               clickfinger_behavior = true
               disable_while_typing = true
               natural_scroll = true
@@ -50,12 +50,10 @@
             }
           }
 
-          gestures {
-            workspace_swipe = on
-          }
+          gesture = 3, horizontal, workspace
 
-          binde = ",XF86MonBrightnessUp,   exec, ${brightnessctl} --quiet --device=gmux_backlight set +5%"
-          binde = ",XF86MonBrightnessDown, exec, ${brightnessctl} --quiet --device=gmux_backlight set 5%-"
+          binde = ,XF86MonBrightnessUp,   exec, ${brightnessctl} --quiet --device=gmux_backlight set +5%
+          binde = ,XF86MonBrightnessDown, exec, ${brightnessctl} --quiet --device=gmux_backlight set 5%-
         '';
       };
     };
