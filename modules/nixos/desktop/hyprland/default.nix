@@ -8,8 +8,8 @@ let
   cfg = config.xyz.adtya.recipes.desktop.hyprland;
   user-cfg = config.xyz.adtya.recipes.core.users.primary;
 
-  hyprland-pkg = pkgs.hyprland;
-  xdph-pkg = pkgs.xdg-desktop-portal-hyprland;
+  hyprland-pkg = config.programs.hyprland.package;
+  xdph-pkg = config.programs.hyprland.portalPackage;
 
   hyprland-extra-conf = pkgs.writeTextFile {
     name = "hyprland-extra.conf";
@@ -60,9 +60,10 @@ in
       "L+ ${user-cfg.home}/.config/hypr/hyprland.conf -    -                -                 - ${hyprland-conf}"
     ];
 
-    programs.hyprland.enable = true;
-
-    services.displayManager.sessionPackages = [ hyprland-pkg ];
+    programs.hyprland = {
+      enable = true;
+      withUWSM = true;
+    };
 
     environment.systemPackages = [
       pkgs.dracula-theme
