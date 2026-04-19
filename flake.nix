@@ -38,16 +38,18 @@
         long-name = "Adithya Nair";
         email = "adtya@adtya.xyz";
       };
-      mkHost = hostname: system: lib.nixosSystem {
-        inherit system;
-        pkgs = pkgsFor system;
-        specialArgs = { inherit inputs primary-user; };
-        modules = [
-          (_: { nixpkgs.hostPlatform = system; })
-          ./hosts/shared
-          ./hosts/${lib.strings.toLower hostname}
-        ];
-      };
+      mkHost =
+        hostname: system:
+        lib.nixosSystem {
+          inherit system;
+          pkgs = pkgsFor system;
+          specialArgs = { inherit inputs primary-user; };
+          modules = [
+            (_: { nixpkgs.hostPlatform = system; })
+            ./hosts/shared
+            ./hosts/${lib.strings.toLower hostname}
+          ];
+        };
       hosts = {
         Gloria = "x86_64-linux";
         Gwen = "x86_64-linux";
@@ -84,5 +86,5 @@
       nixosModules.default = import ./modules;
 
       nixosConfigurations = lib.mapAttrs mkHost hosts;
-};
+    };
 }
