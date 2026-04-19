@@ -84,4 +84,5 @@
       nixosModules.default = import ./modules;
 
       nixosConfigurations = lib.mapAttrs mkHost hosts;
+};
 }
