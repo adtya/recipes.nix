@@ -33,6 +33,31 @@
           config.allowUnfree = true;
           overlays = [ inputs.self.overlays.default ];
         };
+      primary-user = {
+        name = "adtya";
+        long-name = "Adithya Nair";
+        email = "adtya@adtya.xyz";
+      };
+      mkHost = hostname: system: lib.nixosSystem {
+        inherit system;
+        pkgs = pkgsFor system;
+        specialArgs = { inherit inputs primary-user; };
+        modules = [
+          (_: { nixpkgs.hostPlatform = system; })
+          ./hosts/shared
+          ./hosts/${lib.strings.toLower hostname}
+        ];
+      };
+      hosts = {
+        Gloria = "x86_64-linux";
+        Gwen = "x86_64-linux";
+        Skipper = "x86_64-linux";
+        Thor = "x86_64-linux";
+        Bifrost = "x86_64-linux";
+        Rico0 = "aarch64-linux";
+        Rico1 = "aarch64-linux";
+        Rico2 = "aarch64-linux";
+      };
     in
     {
       formatter = forAllSystems (
@@ -58,95 +83,5 @@
       overlays.default = import ./overlays;
       nixosModules.default = import ./modules;
 
-      nixosConfigurations =
-        let
-          primary-user = {
-            name = "adtya";
-            long-name = "Adithya Nair";
-            email = "adtya@adtya.xyz";
-          };
-        in
-        {
-          Gloria = lib.nixosSystem rec {
-            system = "x86_64-linux";
-            pkgs = pkgsFor system;
-            specialArgs = { inherit inputs primary-user; };
-            modules = [
-              (_: { nixpkgs.hostPlatform = system; })
-              ./hosts/shared
-              ./hosts/gloria
-            ];
-          };
-          Gwen = lib.nixosSystem rec {
-            system = "x86_64-linux";
-            pkgs = pkgsFor system;
-            specialArgs = { inherit inputs primary-user; };
-            modules = [
-              (_: { nixpkgs.hostPlatform = system; })
-              ./hosts/shared
-              ./hosts/gwen
-            ];
-          };
-          Skipper = lib.nixosSystem rec {
-            system = "x86_64-linux";
-            pkgs = pkgsFor system;
-            specialArgs = { inherit inputs primary-user; };
-            modules = [
-              (_: { nixpkgs.hostPlatform = system; })
-              ./hosts/shared
-              ./hosts/skipper
-            ];
-          };
-          Thor = lib.nixosSystem rec {
-            system = "x86_64-linux";
-            pkgs = pkgsFor system;
-            specialArgs = { inherit inputs primary-user; };
-            modules = [
-              (_: { nixpkgs.hostPlatform = system; })
-              ./hosts/shared
-              ./hosts/thor
-            ];
-          };
-          Bifrost = lib.nixosSystem rec {
-            system = "x86_64-linux";
-            pkgs = pkgsFor system;
-            specialArgs = { inherit inputs primary-user; };
-            modules = [
-              (_: { nixpkgs.hostPlatform = system; })
-              ./hosts/shared
-              ./hosts/bifrost
-            ];
-          };
-          Rico0 = lib.nixosSystem rec {
-            system = "aarch64-linux";
-            pkgs = pkgsFor system;
-            specialArgs = { inherit inputs primary-user; };
-            modules = [
-              (_: { nixpkgs.hostPlatform = system; })
-              ./hosts/shared
-              ./hosts/rico0
-            ];
-          };
-          Rico1 = lib.nixosSystem rec {
-            system = "aarch64-linux";
-            pkgs = pkgsFor system;
-            specialArgs = { inherit inputs primary-user; };
-            modules = [
-              (_: { nixpkgs.hostPlatform = system; })
-              ./hosts/shared
-              ./hosts/rico1
-            ];
-          };
-          Rico2 = lib.nixosSystem rec {
-            system = "aarch64-linux";
-            pkgs = pkgsFor system;
-            specialArgs = { inherit inputs primary-user; };
-            modules = [
-              (_: { nixpkgs.hostPlatform = system; })
-              ./hosts/shared
-              ./hosts/rico2
-            ];
-          };
-        };
-    };
+      nixosConfigurations = lib.mapAttrs mkHost hosts;
 }
