@@ -5,15 +5,19 @@
   ...
 }:
 let
-  cfg = config.xyz.adtya.recipes.programs.ghostty;
+  configFormat = pkgs.formats.json { };
+  cfg = config.xyz.adtya.recipes.programs.waybar;
   hyprland-cfg = config.xyz.adtya.recipes.desktop.hyprland;
   user-cfg = config.xyz.adtya.recipes.core.users.primary;
 
-  waybar-conf = pkgs.replaceVars ./config.jsonc {
+  waybar-config = import ./config.nix {
+    inherit (cfg) laptop-mode;
     blueman = lib.getExe' pkgs.blueman "blueman-manager";
     pwvucontrol = lib.getExe pkgs.pwvucontrol;
+
   };
   waybar-style = ./style.css;
+  waybar-config-file = configFormat.generate "config.jsonc" waybar-config;
 in
 {
   options = {
@@ -29,6 +33,12 @@ in
         default = pkgs.waybar;
         description = "Waybar package";
       };
+      laptop-mode = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "Enable laptop-relevant modules";
+      };
+
     };
   };
 
@@ -38,7 +48,7 @@ in
 
     systemd.tmpfiles.rules = [
       "d  ${user-cfg.home}/.config/waybar              0755 ${user-cfg.name} ${user-cfg.group} - -"
-      "L+ ${user-cfg.home}/.config/waybar/config.jsonc -    -                -                 - ${waybar-conf}"
+      "L+ ${user-cfg.home}/.config/waybar/config.jsonc -    -                -                 - ${waybar-config-file}"
       "L+ ${user-cfg.home}/.config/waybar/style.css    -    -                -                 - ${waybar-style}"
     ];
   };
