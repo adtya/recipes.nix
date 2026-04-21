@@ -1,4 +1,11 @@
-{ primary-user, ... }:
+_:
+let
+  primary-user = {
+    name = "adtya";
+    long-name = "Adithya Nair";
+    email = "adtya@adtya.xyz";
+  };
+in
 {
   xyz.adtya.recipes = {
     core = {

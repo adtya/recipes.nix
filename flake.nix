@@ -31,24 +31,17 @@
           config.allowUnfree = true;
           overlays = [ inputs.self.overlays.default ];
         };
-      primary-user = {
-        name = "adtya";
-        long-name = "Adithya Nair";
-        email = "adtya@adtya.xyz";
-      };
       mkHost =
         hostname: system:
         lib.nixosSystem {
           inherit system;
           pkgs = pkgsFor system;
-          specialArgs = { inherit inputs primary-user; };
+          specialArgs = { inherit inputs; };
           modules = [
             inputs.self.nixosModules.default
             (_: {
               nixpkgs.hostPlatform = system;
-              xyz.adtya.recipes.hostinfo = {
-                inherit hostname;
-              };
+              xyz.adtya.recipes.hostinfo = { inherit hostname; };
             })
             ./hosts/shared
             ./hosts/${lib.strings.toLower hostname}
