@@ -28,7 +28,14 @@
         system:
         import inputs.nixpkgs {
           inherit system;
-          config.allowUnfree = true;
+          config.allowUnfreePredicate =
+            pkg:
+            builtins.elem (lib.getName pkg) [
+              "1password-cli"
+              "1password"
+              "discord"
+              "spotify"
+            ];
           overlays = [ inputs.self.overlays.default ];
         };
       mkHost =
@@ -49,6 +56,8 @@
         };
     in
     {
+      overlays.default = import ./overlays;
+
       formatter = forAllSystems (
         system:
         (import ./formatter.nix {
@@ -68,8 +77,6 @@
       devShells = forAllSystems (system: (import ./devshells.nix { pkgs = pkgsFor system; }));
 
       packages = forAllSystems (system: (import ./packages.nix { pkgs = pkgsFor system; }));
-
-      overlays.default = import ./overlays;
 
       nixosModules.default = import ./modules;
 
