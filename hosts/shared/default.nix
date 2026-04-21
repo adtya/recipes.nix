@@ -1,7 +1,6 @@
 { inputs, ... }:
 {
   imports = [
-    inputs.self.nixosModules.default
 
     ./users.nix
   ];

@@ -26,7 +26,6 @@
     boot.plymouth.theme = "owl";
 
     hostinfo = {
-      host-name = "Gloria";
       tailscale-ip = "100.69.69.3";
     };
 
@@ -76,13 +75,18 @@
       };
     };
 
-    misc.devtools.enable = true;
+    misc = {
+      bluetooth.enable = true;
+      devtools.enable = true;
+    };
 
     networking.wireless = false;
 
     presets = {
       desktop = true;
     };
+
+    programs.waybar.laptop-mode = true;
   };
 
   networking.networkmanager.unmanaged = [ "mac:ac:de:48:00:11:22" ];

@@ -31,7 +31,6 @@
     boot.plymouth.theme = "owl";
 
     hostinfo = {
-      host-name = "Gwen";
       tailscale-ip = "100.69.69.5";
     };
 

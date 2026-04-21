@@ -43,21 +43,17 @@
           pkgs = pkgsFor system;
           specialArgs = { inherit inputs primary-user; };
           modules = [
-            (_: { nixpkgs.hostPlatform = system; })
+            inputs.self.nixosModules.default
+            (_: {
+              nixpkgs.hostPlatform = system;
+              xyz.adtya.recipes.hostinfo = {
+                inherit hostname;
+              };
+            })
             ./hosts/shared
             ./hosts/${lib.strings.toLower hostname}
           ];
         };
-      hosts = {
-        Gloria = "x86_64-linux";
-        Gwen = "x86_64-linux";
-        Skipper = "x86_64-linux";
-        Thor = "x86_64-linux";
-        Bifrost = "x86_64-linux";
-        Rico0 = "aarch64-linux";
-        Rico1 = "aarch64-linux";
-        Rico2 = "aarch64-linux";
-      };
     in
     {
       formatter = forAllSystems (
@@ -81,8 +77,18 @@
       packages = forAllSystems (system: (import ./packages.nix { pkgs = pkgsFor system; }));
 
       overlays.default = import ./overlays;
+
       nixosModules.default = import ./modules;
 
-      nixosConfigurations = lib.mapAttrs mkHost hosts;
+      nixosConfigurations = lib.mapAttrs mkHost {
+        Bifrost = "x86_64-linux";
+        Gloria = "x86_64-linux";
+        Gwen = "x86_64-linux";
+        Skipper = "x86_64-linux";
+        Thor = "x86_64-linux";
+        Rico0 = "aarch64-linux";
+        Rico1 = "aarch64-linux";
+        Rico2 = "aarch64-linux";
+      };
     };
 }

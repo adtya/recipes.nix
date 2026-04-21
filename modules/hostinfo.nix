@@ -5,7 +5,7 @@ in
 {
   options = {
     xyz.adtya.recipes.hostinfo = {
-      host-name = lib.mkOption {
+      hostname = lib.mkOption {
         type = lib.types.str;
         default = null;
         description = "A name for the host";
@@ -31,5 +31,5 @@ in
     };
   };
 
-  config = lib.mkIf (cfg.host-name != null) { networking.hostName = cfg.host-name; };
+  config = lib.mkIf (cfg.hostname != null) { networking.hostName = cfg.hostname; };
 }

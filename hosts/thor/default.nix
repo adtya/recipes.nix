@@ -45,7 +45,6 @@
 
   xyz.adtya.recipes = {
     hostinfo = {
-      host-name = "Thor";
       local-ip = "192.168.1.20";
       tailscale-ip = "100.69.69.1";
     };

@@ -9,10 +9,6 @@
   ];
 
   xyz.adtya.recipes = {
-    hostinfo = {
-      host-name = "Skipper";
-    };
-
     networking.wireless = true;
     presets.desktop = true;
   };
