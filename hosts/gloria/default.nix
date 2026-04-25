@@ -54,8 +54,8 @@
 
             gesture = 3, horizontal, workspace
 
-            binde = ,XF86MonBrightnessUp,   exec, ${brightnessctl} --quiet --device=gmux_backlight set +5%
-            binde = ,XF86MonBrightnessDown, exec, ${brightnessctl} --quiet --device=gmux_backlight set 5%-
+            binde = ,XF86MonBrightnessUp,   exec, ${brightnessctl} --quiet --device=intel_backlight set +5%
+            binde = ,XF86MonBrightnessDown, exec, ${brightnessctl} --quiet --device=intel_backlight set 5%-
           '';
       };
     };
