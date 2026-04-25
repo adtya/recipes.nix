@@ -36,6 +36,7 @@
               "discord"
               "spotify"
               "steam"
+              "steam-unwrapped"
             ];
           overlays = [ inputs.self.overlays.default ];
         };
