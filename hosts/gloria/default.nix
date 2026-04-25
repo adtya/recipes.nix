@@ -7,21 +7,6 @@
 {
   imports = [ ./hardware ];
 
-  nix.settings = {
-    extra-substituters = [
-      "https://cache.soopy.moe"
-      "https://t2linux.cachix.org"
-    ];
-    extra-trusted-substituters = [
-      "https://cache.soopy.moe"
-      "https://t2linux.cachix.org"
-    ];
-    extra-trusted-public-keys = [
-      "cache.soopy.moe-1:0RZVsQeR+GOh0VQI9rvnHz55nVXkFardDqfm4+afjPo="
-      "t2linux.cachix.org-1:P733c5Gt1qTcxsm+Bae0renWnT8OLs0u9+yfaK2Bejw="
-    ];
-  };
-
   xyz.adtya.recipes = {
     boot.plymouth.theme = "owl";
 
@@ -88,8 +73,6 @@
 
     programs.waybar.laptop-mode = true;
   };
-
-  networking.networkmanager.unmanaged = [ "mac:ac:de:48:00:11:22" ];
 
   services = {
     thermald.enable = true;

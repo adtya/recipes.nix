@@ -8,7 +8,7 @@
 
   disko.devices.disk = {
     "${config.networking.hostName}" = {
-      device = "/dev/disk/by-id/nvme-APPLE_SSD_AP0512N_C02208300ZQNFHTAF";
+      device = "/dev/disk/by-id/nvme-nvme.1c5c-434441364e373534393131353036533042-534b48796e69785f48465332353647444539583038314e-00000001";
       type = "disk";
       content = {
         type = "gpt";
