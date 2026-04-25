@@ -9,7 +9,7 @@ _: {
         authorizedKeys = [
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPxDgoV9yf+yPnp4pt5EWgo7uC25W66ehoL/rlshVW+8 Skipper"
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPodFFNUK16y9bjHVMhr+Ykro3v1FVLbmqKg7mjMv3Wz Kowalski"
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIN9P0AwrbtEDMeISE16bjzJoXURgjoCSV7AKs3l/BbPY Gloria"
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGvpl59puIcC7RQVuEVbcMVwgvkgfLz8qDeEbtLuoLyk Gloria"
         ];
         hostKeys = [
           "/persist/secrets/initrd/ssh/keys/ssh_host_ed25519_key"
