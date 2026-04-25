@@ -84,6 +84,9 @@ in
         };
       };
     };
+    systemd.tmpfiles.rules = [
+      "d  ${cfg.primary.home}/.config 0755 ${cfg.primary.name} ${cfg.primary.group} - -"
+    ];
     users = {
       mutableUsers = false;
       users = {
