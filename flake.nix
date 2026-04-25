@@ -37,6 +37,7 @@
               "spotify"
               "steam"
               "steam-unwrapped"
+              "xone-dongle-firmware"
             ];
           overlays = [ inputs.self.overlays.default ];
         };
