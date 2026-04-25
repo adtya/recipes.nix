@@ -35,6 +35,7 @@
               "1password"
               "discord"
               "spotify"
+              "steam"
             ];
           overlays = [ inputs.self.overlays.default ];
         };
