@@ -54,8 +54,9 @@
     };
 
     desktop = {
-      dm.flavour = "cosmic";
-      sway.enable = true;
+      dm.flavour = "gdm";
+      gnome.enable = true;
+      sway.enable = false;
       hyprland = {
         enable = false;
         extraConfig = ''
