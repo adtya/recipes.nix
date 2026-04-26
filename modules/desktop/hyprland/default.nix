@@ -74,8 +74,10 @@ in
 
     programs.hyprland = {
       enable = true;
-      withUWSM = true;
+      withUWSM = false;
     };
+
+    services.displayManager.sessionPackages = [ cfg.hyprland-pkg ];
 
     environment.systemPackages = [
       pkgs.dracula-theme
