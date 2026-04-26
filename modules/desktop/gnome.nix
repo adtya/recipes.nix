@@ -6,7 +6,7 @@
 }:
 let
   cfg = config.xyz.adtya.recipes.desktop.gnome;
-  terminal-cfg = config.xyz.adtya.recipes.programs.terminal;
+  ghostty-cfg = config.xyz.adtya.recipes.programs.ghostty;
   enabled-extensions = with pkgs.gnomeExtensions; [
     appindicator
     caffeine
@@ -70,7 +70,7 @@ in
             };
             "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
               name = "Terminal";
-              command = lib.getExe terminal-cfg.package;
+              command = lib.getExe ghostty-cfg.package;
               binding = "<Super>Return";
             };
             "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
