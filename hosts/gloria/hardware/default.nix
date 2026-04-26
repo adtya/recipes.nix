@@ -28,6 +28,8 @@
     ];
   };
 
+  environment.sessionVariables.VDPAU_DRIVER = "va_gl";
+
   hardware = {
     graphics = {
       extraPackages = with pkgs; [
@@ -39,4 +41,5 @@
     cpu.intel.updateMicrocode = true;
     enableRedistributableFirmware = true;
   };
+  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
 }
