@@ -19,11 +19,10 @@
     };
 
     desktop = {
-      dm.flavour = "gdm";
-      gnome.enable = true;
-      sway.enable = false;
+      dm.flavour = "cosmic";
       hyprland = {
-        enable = false;
+        enable = true;
+        laptop-mode = true;
         extraConfig =
           let
             brightnessctl = lib.getExe pkgs.brightnessctl;
@@ -38,19 +37,30 @@
               }
             }
 
+            render {
+              cm_auto_hdr = 2
+            }
+
+            misc {
+              vrr = 2
+            }
+
             monitorv2 {
               output = eDP-1
               mode = preferred
               position = 0x0
-              scale = 1.5
+              scale = auto
               transform = 0
+              supports_wide_color = 1
+              supports_hdr = 1
+              bitdepth = 10
             }
 
             monitorv2 {
               output = *
               mode = preferred
               position = auto-right
-              scale = 1
+              scale = auto
               transform = 0
             }
 
@@ -73,23 +83,9 @@
       desktop = true;
     };
 
-    desktop.addons.waybar.laptop-mode = true;
-  };
-
-  services = {
+    services = {
     thermald.enable = true;
-    auto-cpufreq = {
-      enable = false;
-      settings = {
-        battery = {
-          governor = "powersave";
-          turbo = "never";
-        };
-        charger = {
-          governor = "performance";
-          turbo = "auto";
-        };
-      };
+    upower.enable = true;
     };
   };
 
