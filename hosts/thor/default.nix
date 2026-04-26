@@ -55,8 +55,9 @@
 
     desktop = {
       dm.flavour = "cosmic";
+      sway.enable = true;
       hyprland = {
-        enable = true;
+        enable = false;
         extraConfig = ''
           render {
             cm_auto_hdr = 2

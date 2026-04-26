@@ -2,7 +2,6 @@ _: {
   imports = [
     ./firefox
     ./ghostty
-    ./waybar
 
     ./fonts.nix
     ./starship.nix

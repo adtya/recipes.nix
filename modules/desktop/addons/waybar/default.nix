@@ -6,7 +6,7 @@
 }:
 let
   configFormat = pkgs.formats.json { };
-  cfg = config.xyz.adtya.recipes.programs.waybar;
+  cfg = config.xyz.adtya.recipes.desktop.addons.waybar;
   hyprland-cfg = config.xyz.adtya.recipes.desktop.hyprland;
   user-cfg = config.xyz.adtya.recipes.core.users.primary;
 
@@ -21,11 +21,10 @@ let
 in
 {
   options = {
-    xyz.adtya.recipes.programs.waybar = {
+    xyz.adtya.recipes.desktop.addons.waybar = {
       enable = lib.mkOption {
         type = lib.types.bool;
-        default = hyprland-cfg.enable;
-        defaultText = lib.literalMD "[config.xyz.adtya.recipes.desktop.hyprland.enable](#xyzadtyarecipesdesktophyprlandenable)";
+        default = false;
         description = "Enable Waybar";
       };
       package = lib.mkOption {

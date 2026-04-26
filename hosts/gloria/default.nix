@@ -20,8 +20,9 @@
 
     desktop = {
       dm.flavour = "cosmic";
+      sway.enable = true;
       hyprland = {
-        enable = true;
+        enable = false;
         extraConfig =
           let
             brightnessctl = lib.getExe pkgs.brightnessctl;
@@ -71,7 +72,7 @@
       desktop = true;
     };
 
-    programs.waybar.laptop-mode = true;
+    desktop.addon.waybar.laptop-mode = true;
   };
 
   services = {

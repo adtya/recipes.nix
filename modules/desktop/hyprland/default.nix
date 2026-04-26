@@ -55,6 +55,10 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    xyz.adtya.recipes.desktop.addons = {
+      waybar.enable = true;
+    };
+
     systemd.tmpfiles.rules = [
       "d  ${user-cfg.home}/.config/hypr               0755 ${user-cfg.name} ${user-cfg.group} - -"
       "L+ ${user-cfg.home}/.config/hypr/hyprland.conf -    -                -                 - ${hyprland-conf}"

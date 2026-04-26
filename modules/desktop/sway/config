@@ -1,0 +1,13 @@
+input "type:keyboard" {
+  xkb_layout us
+  xkb_options rupeesign:4
+  xkb_variant altgr-intl
+}
+
+set $mod Mod4
+
+bindsym $mod+Return  exec @ghostty@
+bindsym $mod+d       exec @rofi@ -show drun
+bindsym $mod+Shift+q kill
+
+bindsym $mod+Shift+c reload

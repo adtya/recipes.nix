@@ -12,7 +12,9 @@ in
 
 {
   imports = [
+    ./addons
     ./hyprland
+    ./sway
 
     ./gnome.nix
   ];
