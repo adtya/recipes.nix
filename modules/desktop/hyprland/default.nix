@@ -46,6 +46,11 @@ in
         default = false;
         description = "Enable Hyprland";
       };
+      laptop-mode = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "Enable laptop-relevant features in hyprland and friends";
+      };
       extraConfig = lib.mkOption {
         type = lib.types.str;
         default = "";
@@ -56,7 +61,10 @@ in
 
   config = lib.mkIf cfg.enable {
     xyz.adtya.recipes.desktop.addons = {
-      waybar.enable = true;
+      waybar = {
+        enable = true;
+        inherit laptop-mode;
+      };
     };
 
     systemd.tmpfiles.rules = [
