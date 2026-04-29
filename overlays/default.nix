@@ -12,9 +12,8 @@ _final: prev: {
   );
   caddy-hetzner = prev.caddy.withPlugins {
     plugins = [ "github.com/caddy-dns/hetzner/v2@v2.0.0-preview-3" ];
-    hash = "sha256-qLsfK9zaZMGVtpHHmsAkK3dgXR+4NKKz2vk9h+1G/64=";
+    hash = "sha256-b2lDSYMUT+3jA0xaQGkcgeAbRFbDnVwa2za5lOuWuIc=";
   };
-
   bolt = prev.bolt.overrideAttrs (
     finalAttrs: _prevAttrs: {
       version = "0.9.11";
