@@ -7,7 +7,6 @@
 let
   configFormat = pkgs.formats.json { };
   cfg = config.xyz.adtya.recipes.desktop.addons.waybar;
-  hyprland-cfg = config.xyz.adtya.recipes.desktop.hyprland;
   user-cfg = config.xyz.adtya.recipes.core.users.primary;
 
   waybar-config = import ./config.nix {

@@ -1,3 +1,8 @@
 _: {
-  imports = [./waybar];
+  imports = [
+    ./auth-agent.nix
+    ./wallpapers.nix
+
+    ./waybar
+  ];
 }

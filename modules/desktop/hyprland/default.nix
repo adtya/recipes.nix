@@ -26,6 +26,7 @@ let
     loginctl = lib.getExe' pkgs.systemd "loginctl";
     playerctl = lib.getExe pkgs.playerctl;
     rofi = lib.getExe pkgs.rofi;
+    runapp = lib.getExe pkgs.runapp;
     wpctl = lib.getExe' pkgs.wireplumber "wpctl";
     yazi = lib.getExe pkgs.yazi;
     systemctl = lib.getExe' pkgs.systemd "systemctl";
@@ -61,9 +62,11 @@ in
 
   config = lib.mkIf cfg.enable {
     xyz.adtya.recipes.desktop.addons = {
+      auth-agent.enable = true;
+      wallpapers.enable = true;
       waybar = {
         enable = true;
-        inherit laptop-mode;
+        inherit (cfg) laptop-mode;
       };
     };
 
@@ -74,10 +77,8 @@ in
 
     programs.hyprland = {
       enable = true;
-      withUWSM = false;
+      withUWSM = true;
     };
-
-    services.displayManager.sessionPackages = [ cfg.hyprland-pkg ];
 
     environment.systemPackages = [
       pkgs.dracula-theme
