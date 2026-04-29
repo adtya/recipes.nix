@@ -5,6 +5,7 @@
     lanzaboote.url = "github:nix-community/lanzaboote?ref=master";
     nixos-hardware.url = "github:NixOS/nixos-hardware?ref=master";
     nixpkgs.url = "github:NixOS/nixpkgs?ref=nixos-unstable";
+    nixvim.url = "github:nix-community/nixvim?ref=main";
     smc-fonts.url = "gitlab:smc/smc-fonts-flake?ref=trunk";
     sops-nix.url = "github:Mic92/sops-nix?ref=master";
     treefmt-nix.url = "github:numtide/treefmt-nix?ref=main";
@@ -79,7 +80,13 @@
 
       devShells = forAllSystems (system: (import ./devshells.nix { pkgs = pkgsFor system; }));
 
-      packages = forAllSystems (system: (import ./packages.nix { pkgs = pkgsFor system; }));
+      packages = forAllSystems (
+        system:
+        (import ./packages.nix {
+          pkgs = pkgsFor system;
+          nixvim' = inputs.nixvim.legacyPackages.${system};
+        })
+      );
 
       nixosModules.default = import ./modules;
 

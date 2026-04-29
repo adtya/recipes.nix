@@ -1,4 +1,5 @@
-_: {
+{ inputs, ... }:
+{
   imports = [
     ./firefox
     ./ghostty
@@ -10,11 +11,10 @@ _: {
 
   programs = {
     git.enable = true;
-    neovim = {
+    nixvim = {
       enable = true;
       defaultEditor = true;
-      viAlias = true;
-      vimAlias = true;
+      imports = [ "${inputs.self}/nixvim" ];
     };
   };
 }

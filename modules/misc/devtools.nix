@@ -2,7 +2,6 @@
   lib,
   config,
   pkgs,
-  inputs,
   ...
 }:
 let
@@ -80,12 +79,6 @@ in
         };
       };
       lazygit.enable = true;
-      neovim = {
-        enable = true;
-        defaultEditor = true;
-        viAlias = true;
-        vimAlias = true;
-      };
     };
   };
 }
