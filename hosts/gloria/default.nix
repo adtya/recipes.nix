@@ -1,11 +1,16 @@
 {
   lib,
   pkgs,
-  inputs,
   ...
 }:
 {
   imports = [ ./hardware ];
+
+  boot = {
+    loader.systemd-boot = {
+      consoleMode = "3";
+    };
+  };
 
   xyz.adtya.recipes = {
     boot.plymouth.theme = "owl";
@@ -82,11 +87,10 @@
     presets = {
       desktop = true;
     };
-
-    services = {
+  };
+  services = {
     thermald.enable = true;
     upower.enable = true;
-    };
   };
 
   system.stateVersion = "26.05";
