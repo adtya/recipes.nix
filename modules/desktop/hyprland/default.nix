@@ -80,7 +80,14 @@ in
       withUWSM = true;
     };
 
+    qt = {
+      enable = true;
+      platformTheme = "gnome";
+      style = "adwaita";
+    };
+
     environment.systemPackages = [
+      pkgs.bibata-cursors
       pkgs.dracula-theme
       pkgs.dracula-icon-theme
       pkgs.adwaita-icon-theme
