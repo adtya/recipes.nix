@@ -34,6 +34,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    xyz.adtya.recipes.virtualisation.containers.enable = true;
     environment.systemPackages = with pkgs; [
       delta
       doctl

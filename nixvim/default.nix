@@ -67,7 +67,9 @@ _: {
   ciplboard.providers.wl-copy.enable = true;
   colorschemes.dracula-nvim = {
     enable = true;
-    settings = {transparent_bg = true;};
+    settings = {
+      transparent_bg = true;
+    };
   };
 
 }

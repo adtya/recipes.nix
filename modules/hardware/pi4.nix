@@ -19,7 +19,12 @@ in
   config = lib.mkIf cfg {
     boot = {
       kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
-      initrd.availableKernelModules = [ "xhci_pci" "usbhid" "usb_storage" "uas" ];
+      initrd.availableKernelModules = [
+        "xhci_pci"
+        "usbhid"
+        "usb_storage"
+        "uas"
+      ];
     };
 
     hardware.enableRedistributableFirmware = true;
