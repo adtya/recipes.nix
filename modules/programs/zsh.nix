@@ -44,10 +44,10 @@ in
           "HIST_IGNORE_ALL_DUPS"
           "HIST_IGNORE_SPACE"
 
-          "NO_APPEND_HISTORY"
+          "APPEND_HISTORY"
           "NO_HIST_SAVE_NO_DUPS"
           "NO_HIST_FIND_NO_DUPS"
-          "NO_SHARE_HISTORY"
+          "SHARE_HISTORY"
         ];
       };
     };
