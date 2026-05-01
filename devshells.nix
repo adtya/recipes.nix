@@ -2,6 +2,7 @@
 {
   default = pkgs.mkShell {
     buildInputs = with pkgs; [
+      disko
       dnscontrol
       git
       age

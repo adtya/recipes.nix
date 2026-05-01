@@ -1,59 +1,77 @@
-_: {
+{ config, inputs, ... }:
+{
+  imports = [ inputs.disko.nixosModules.disko ];
   services.btrfs.autoScrub = {
     enable = true;
     fileSystems = [ "/mnt/system" ];
   };
-  fileSystems = {
-    "/" = {
-      device = "/dev/disk/by-partlabel/RICO2_ROOT";
-      fsType = "btrfs";
-      options = [
-        "subvol=@root"
-        "compress=zstd"
-        "noatime"
-      ];
-      neededForBoot = true;
-    };
 
-    "/nix" = {
-      device = "/dev/disk/by-partlabel/RICO2_ROOT";
-      fsType = "btrfs";
-      options = [
-        "subvol=@nix"
-        "compress=zstd"
-        "noatime"
-      ];
-      neededForBoot = true;
-    };
-
-    "/persist" = {
-      device = "/dev/disk/by-partlabel/RICO2_ROOT";
-      fsType = "btrfs";
-      options = [
-        "subvol=@persist"
-        "compress=zstd"
-        "noatime"
-      ];
-      neededForBoot = true;
-    };
-
-    "/mnt/system" = {
-      device = "/dev/disk/by-partlabel/RICO2_ROOT";
-      fsType = "btrfs";
-      options = [
-        "subvol=/"
-        "compress=zstd"
-        "noatime"
-      ];
-    };
-
-    "/boot" = {
-      device = "/dev/disk/by-partlabel/RICO2_BOOT";
-      fsType = "vfat";
-      options = [
-        "fmask=0022"
-        "dmask=0022"
-      ];
+  disko.devices.disk = {
+    "${config.networking.hostName}" = {
+      device = "/dev/disk/by-id/usb-Samsung_Type-C_0375421070003215-0:0";
+      type = "disk";
+      content = {
+        type = "gpt";
+        partitions = {
+          FIRMWARE = {
+            type = "EF00";
+            size = "512M";
+            priority = 1;
+            content = {
+              type = "filesystem";
+              format = "vfat";
+              mountpoint = "/boot/firmware";
+              mountOptions = [ "umask=0077" ];
+            };
+          };
+          BOOT = {
+            size = "1G";
+            priority = 2;
+            content = {
+              type = "filesystem";
+              format = "ext4";
+              mountpoint = "/boot";
+              mountOptions = [ "relatime" ];
+            };
+          };
+          SYSTEM = {
+            size = "100%";
+            priority = 3;
+            content = {
+              type = "btrfs";
+              mountpoint = "/mnt/system";
+              mountOptions = [
+                "compress=zstd"
+                "relatime"
+              ];
+              subvolumes = {
+                "@root" = {
+                  mountpoint = "/";
+                  mountOptions = [
+                    "compress=zstd"
+                    "relatime"
+                  ];
+                };
+                "@nix" = {
+                  mountpoint = "/nix";
+                  mountOptions = [
+                    "compress=zstd"
+                    "relatime"
+                  ];
+                };
+                "@persist" = {
+                  mountpoint = "/persist";
+                  mountOptions = [
+                    "compress=zstd"
+                    "relatime"
+                  ];
+                };
+              };
+            };
+          };
+        };
+      };
     };
   };
+  fileSystems."/persist".neededForBoot = true;
 }
