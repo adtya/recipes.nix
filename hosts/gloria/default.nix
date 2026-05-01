@@ -1,16 +1,6 @@
-{
-  lib,
-  pkgs,
-  ...
-}:
+{ lib, pkgs, ... }:
 {
   imports = [ ./hardware ];
-
-  boot = {
-    loader.systemd-boot = {
-      consoleMode = "3";
-    };
-  };
 
   xyz.adtya.recipes = {
     boot.plymouth.theme = "owl";
