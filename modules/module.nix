@@ -1,10 +1,8 @@
-{ inputs, ... }:
-{
+_: {
   imports = [
     ./boot
     ./core
     ./desktop
-    ./hardware
     ./misc
     ./networking
     ./presets
