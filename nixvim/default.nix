@@ -64,7 +64,7 @@ _: {
     }
   ];
 
-  ciplboard.providers.wl-copy.enable = true;
+  clipboard.providers.wl-copy.enable = true;
   colorschemes.dracula-nvim = {
     enable = true;
     settings = {
