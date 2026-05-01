@@ -2,6 +2,7 @@
   lib,
   config,
   pkgs,
+  inputs,
   ...
 }:
 let
@@ -80,6 +81,13 @@ in
         };
       };
       lazygit.enable = true;
+      neovim.enable = false;
+      nixvim = {
+        enable = true;
+        defaultEditor = true;
+        imports = [ "${inputs.self}/nixvim" ];
+      };
+
     };
   };
 }

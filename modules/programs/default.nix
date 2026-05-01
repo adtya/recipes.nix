@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ lib, ... }:
 {
   imports = [
     ./firefox
@@ -11,10 +11,11 @@
 
   programs = {
     git.enable = true;
-    nixvim = {
-      enable = true;
+    neovim = {
+      enable = lib.mkDefault true;
       defaultEditor = true;
-      imports = [ "${inputs.self}/nixvim" ];
+      viAlias = true;
+      vimAlias = true;
     };
   };
 }
