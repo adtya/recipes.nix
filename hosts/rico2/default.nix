@@ -1,11 +1,12 @@
 _: {
   imports = [
-    ./hardware
+    ./filesystem.nix
+
     ./services
   ];
 
   xyz.adtya.recipes = {
-    boot.default = false; # conflicts with boot setup from nixos-hardware
+    hardware.pi4 = true;
     hostinfo = {
       local-ip = "192.168.1.12";
       tailscale-ip = "100.69.69.12";
