@@ -1,9 +1,4 @@
-{
-  lib,
-  pkgs,
-  inputs,
-  ...
-}:
+{ pkgs, ... }:
 {
   imports = [
     ./hardware
@@ -54,20 +49,12 @@
     };
 
     desktop = {
-      dm.flavour = "gdm";
-      gnome.enable = true;
-      sway.enable = false;
+      dm.flavour = "cosmic";
       hyprland = {
-        enable = false;
+        enable = true;
+        hdr = true;
+        vrr = true;
         extraConfig = ''
-          render {
-            cm_auto_hdr = 2
-          }
-
-          misc {
-            vrr = 2
-          }
-
           monitorv2 {
             output = DP-1
             mode = 3440x1440@175

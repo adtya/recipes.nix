@@ -17,53 +17,29 @@
       dm.flavour = "cosmic";
       hyprland = {
         enable = true;
+        hdr = true;
         laptop-mode = true;
-        extraConfig =
-          let
-            brightnessctl = lib.getExe pkgs.brightnessctl;
-          in
-          ''
-            input {
-              touchpad {
-                clickfinger_behavior = true
-                disable_while_typing = true
-                natural_scroll = true
-                tap-to-click = true
-              }
-            }
+        backlight-device = "intel_backlight";
+        extraConfig = ''
+          monitorv2 {
+            output = eDP-1
+            mode = preferred
+            position = 0x0
+            scale = auto
+            transform = 0
+            supports_wide_color = 1
+            supports_hdr = 1
+            bitdepth = 10
+          }
 
-            render {
-              cm_auto_hdr = 2
-            }
-
-            misc {
-              vrr = 2
-            }
-
-            monitorv2 {
-              output = eDP-1
-              mode = preferred
-              position = 0x0
-              scale = auto
-              transform = 0
-              supports_wide_color = 1
-              supports_hdr = 1
-              bitdepth = 10
-            }
-
-            monitorv2 {
-              output = *
-              mode = preferred
-              position = auto-right
-              scale = auto
-              transform = 0
-            }
-
-            gesture = 3, horizontal, workspace
-
-            binde = ,XF86MonBrightnessUp,   exec, ${brightnessctl} --quiet --device=intel_backlight set +5%
-            binde = ,XF86MonBrightnessDown, exec, ${brightnessctl} --quiet --device=intel_backlight set 5%-
-          '';
+          monitorv2 {
+            output = *
+            mode = preferred
+            position = auto-right
+            scale = auto
+            transform = 0
+          }
+        '';
       };
     };
 

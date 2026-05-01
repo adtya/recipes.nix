@@ -13,4 +13,3 @@
 
   hardware.enableRedistributableFirmware = true;
 }
-

@@ -11,10 +11,39 @@ let
   hyprland-pkg = config.programs.hyprland.package;
   xdph-pkg = config.programs.hyprland.portalPackage;
 
-  hyprland-extra-conf = pkgs.writeTextFile {
-    name = "hyprland-extra.conf";
-    text = cfg.extraConfig;
-  };
+  hdr-conf = lib.optionalString cfg.hdr ''
+    render {
+      cm_auto_hdr = 2
+    }
+  '';
+
+  vrr-conf = lib.optionalString cfg.vrr ''
+    misc {
+      vrr = 2
+    }
+  '';
+
+  backlight-conf =
+    let
+      brightnessctl = lib.getExe pkgs.brightnessctl;
+    in
+    lib.optionalString (cfg.backlight-device != null) ''
+      binde = ,XF86MonBrightnessUp,   exec, ${brightnessctl} --quiet --device=intel_backlight set +5%
+      binde = ,XF86MonBrightnessDown, exec, ${brightnessctl} --quiet --device=intel_backlight set 5%-
+    '';
+
+  laptop-conf = lib.optionalString cfg.laptop-mode ''
+    input {
+      touchpad {
+        clickfinger_behavior = true
+        disable_while_typing = true
+        natural_scroll = true
+        tap-to-click = true
+      }
+    }
+
+    gesture = 3, horizontal, workspace
+  '';
 
   hyprland-conf = pkgs.replaceVars ./hyprland.conf {
     blueman = lib.getExe' pkgs.blueman "blueman-manager";
@@ -32,7 +61,13 @@ let
     systemctl = lib.getExe' pkgs.systemd "systemctl";
     power-menu = "/dev/null";
 
-    extra-config = if cfg.extraConfig != "" then "source = ${hyprland-extra-conf}" else "";
+    extra-config = lib.strings.concatLines [
+      hdr-conf
+      vrr-conf
+      backlight-conf
+      laptop-conf
+      cfg.extraConfig
+    ];
 
     # wireplumber uses @..@ to specify default sink. setting null so it's ignored by replaceVars
     DEFAULT_AUDIO_SINK = null;
@@ -51,6 +86,21 @@ in
         type = lib.types.bool;
         default = false;
         description = "Enable laptop-relevant features in hyprland and friends";
+      };
+      hdr = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "Enable HDR";
+      };
+      vrr = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "Enable VRR";
+      };
+      backlight-device = lib.mkOption {
+        type = lib.types.nullOr lib.types.str;
+        default = null;
+        description = "the name of the display backlight device, if present (eg. intel_backlight)";
       };
       extraConfig = lib.mkOption {
         type = lib.types.str;
