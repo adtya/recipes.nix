@@ -3,6 +3,7 @@ _: {
     ./auth-agent.nix
     ./wallpapers.nix
 
+    ./hyprlock
     ./waybar
   ];
 }

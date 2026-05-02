@@ -114,6 +114,7 @@ in
     xyz.adtya.recipes.desktop.addons = {
       auth-agent.enable = true;
       wallpapers.enable = true;
+      hyprlock.enable = true;
       waybar = {
         enable = true;
         inherit (cfg) laptop-mode;
