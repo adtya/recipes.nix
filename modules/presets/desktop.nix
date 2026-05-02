@@ -9,6 +9,7 @@ let
   packages = with pkgs; [
     btop
     celluloid
+    evince
     file
     localsend
     (mpv.override {
