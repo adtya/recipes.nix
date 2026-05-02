@@ -1,0 +1,8 @@
+configuration {
+  modes: "run,drun";
+  cycle: true;
+  font: "Fira Code,Symbols Nerd Font 14";
+}
+
+@theme "dracula"
+

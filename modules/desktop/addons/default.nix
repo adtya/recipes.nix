@@ -6,6 +6,7 @@ _: {
     ./dunst
     ./hyprlock
     ./hypridle
+    ./rofi
     ./waybar
   ];
 }

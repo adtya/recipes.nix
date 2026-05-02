@@ -116,6 +116,7 @@ in
       dunst.enable = true;
       hypridle.enable = true;
       hyprlock.enable = true;
+      rofi.enable = true;
       wallpapers.enable = true;
       waybar = {
         enable = true;
