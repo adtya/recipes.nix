@@ -1,10 +1,7 @@
-{ lib, pkgs, ... }:
-{
+_: {
   imports = [ ./hardware ];
 
   xyz.adtya.recipes = {
-    boot.plymouth.theme = "owl";
-
     hostinfo = {
       tailscale-ip = "100.69.69.3";
     };
