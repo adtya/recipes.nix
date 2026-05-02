@@ -50,6 +50,13 @@
 
     desktop = {
       dm.flavour = "cosmic";
+      addons = {
+        hypridle.timeouts = {
+          lock = 600;
+          screen-off = 900;
+          suspend = 1200;
+        };
+      };
       hyprland = {
         enable = true;
         hdr = true;

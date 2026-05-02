@@ -15,6 +15,12 @@
 
     desktop = {
       dm.flavour = "cosmic";
+      addons = {
+        hypridle.backlight = {
+          display = "intel_backlight";
+          keyboard = "tpacpi::kbd_backlight";
+        };
+      };
       hyprland = {
         enable = true;
         hdr = true;

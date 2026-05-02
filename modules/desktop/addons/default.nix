@@ -4,6 +4,7 @@ _: {
     ./wallpapers.nix
 
     ./hyprlock
+    ./hypridle
     ./waybar
   ];
 }
