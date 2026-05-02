@@ -34,7 +34,10 @@ in
 
   config = lib.mkMerge [
     (lib.mkIf (cfg.flavour != "none") { services.displayManager.enable = true; })
-    (lib.mkIf (cfg.flavour == "cosmic") { services.displayManager.cosmic-greeter.enable = true; })
+    (lib.mkIf (cfg.flavour == "cosmic") {
+      services.displayManager.cosmic-greeter.enable = true;
+      security.pam.services.cosmic-greeter.enableGnomeKeyring = true;
+    })
     (lib.mkIf (cfg.flavour == "gdm") gdmConfig)
   ];
 }
