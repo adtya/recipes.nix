@@ -15,6 +15,13 @@ let
       youtubeSupport = true;
       scripts = with pkgs.mpvScripts; [ mpris ];
     })
+    (imv.overrideAttrs (
+      _final: _prev: {
+        postInstall = ''
+          rm $out/share/applications/imv.desktop
+        '';
+      }
+    ))
     unzip
     wl-clipboard
     xdg-utils
