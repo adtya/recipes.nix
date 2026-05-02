@@ -113,9 +113,10 @@ in
   config = lib.mkIf cfg.enable {
     xyz.adtya.recipes.desktop.addons = {
       auth-agent.enable = true;
-      wallpapers.enable = true;
+      dunst.enable = true;
       hypridle.enable = true;
       hyprlock.enable = true;
+      wallpapers.enable = true;
       waybar = {
         enable = true;
         inherit (cfg) laptop-mode;
