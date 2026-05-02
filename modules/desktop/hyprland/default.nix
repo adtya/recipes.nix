@@ -127,9 +127,35 @@ in
       "L+ ${user-cfg.home}/.config/hypr/hyprland.conf -    -                -                 - ${hyprland-conf}"
     ];
 
-    programs.hyprland = {
-      enable = true;
-      withUWSM = true;
+    programs = {
+      dconf = {
+        profiles.user.databases = [
+          {
+            lockAll = true;
+            settings = {
+              "org/gnome/desktop/sound" = {
+                event-sounds = false;
+              };
+              "org/gnome/desktop/wm/preferences" = {
+                button-layout = "appmenu:close";
+              };
+              "org/gnome/desktop/interface" = {
+                accent-color = "purple";
+                color-scheme = "prefer-dark";
+                cursor-theme = "Bibata-Modern-Amber";
+                gtk-theme = "Dracula";
+                icon-theme = "Dracula";
+                monospace-font-name = "Fira Code 11";
+              };
+            };
+          }
+        ];
+      };
+
+      hyprland = {
+        enable = true;
+        withUWSM = true;
+      };
     };
 
     qt = {
