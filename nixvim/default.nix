@@ -1,10 +1,13 @@
 _: {
   imports = [
     ./bufferline.nix
+    ./cmp.nix
+    ./dashboard.nix
     ./gitsigns.nix
     ./lualine.nix
     ./lsp.nix
     ./neo-tree.nix
+    ./persistence.nix
     ./telescope.nix
     ./treesitter.nix
   ];
