@@ -29,15 +29,6 @@
   # https://bugzilla.kernel.org/show_bug.cgi?id=218733
   networking.wireless.iwd.settings.General.ControlPortOverNL80211 = false;
 
-  programs.gamemode = {
-    settings = {
-      cpu = {
-        amd_x3d_mode_desired = "cache";
-        amd_x3d_mode_default = "frequency";
-      };
-    };
-  };
-
   xyz.adtya.recipes = {
     hostinfo = {
       local-ip = "192.168.1.20";

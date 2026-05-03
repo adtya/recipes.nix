@@ -2,7 +2,6 @@
   lib,
   config,
   pkgs,
-  inputs,
   ...
 }:
 let
@@ -32,13 +31,10 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    xyz.adtya.recipes.core.users.primary.extra-groups = [ "gamemode" ];
-
     environment = {
       systemPackages = lib.mkIf cfg.lutris [
         (pkgs.lutris.override {
           extraPkgs = p: [
-            p.gamemode
             p.gamescope
             p.mangohud
             p.vulkan-tools
@@ -49,21 +45,9 @@ in
     };
 
     programs = {
-      gamemode = {
-        enable = true;
-        enableRenice = true;
-        settings = {
-          general = {
-            inhibit_screensaver = 1;
-            softrealtime = "on";
-          };
-        };
-      };
-
       steam = {
         enable = true;
         extraPackages = with pkgs; [
-          gamemode
           gamescope
           mangohud
           vulkan-tools
