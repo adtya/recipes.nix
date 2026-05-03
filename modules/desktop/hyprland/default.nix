@@ -53,6 +53,7 @@ let
     ghostty = lib.getExe config.xyz.adtya.recipes.programs.ghostty.package;
     librewolf = lib.getExe pkgs.librewolf;
     loginctl = lib.getExe' pkgs.systemd "loginctl";
+    pkill = lib.getExe' pkgs.procps "pkill";
     playerctl = lib.getExe pkgs.playerctl;
     rofi = lib.getExe pkgs.rofi;
     runapp = lib.getExe pkgs.runapp;
