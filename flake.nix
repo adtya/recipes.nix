@@ -67,7 +67,7 @@
         };
     in
     {
-      overlays.default = import ./overlays;
+      overlays.default = import ./overlays.nix;
 
       formatter = forAllSystems (
         system:
