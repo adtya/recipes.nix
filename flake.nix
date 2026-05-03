@@ -36,17 +36,7 @@
         system:
         import inputs.nixpkgs {
           inherit system;
-          config.allowUnfreePredicate =
-            pkg:
-            builtins.elem (lib.getName pkg) [
-              "1password-cli"
-              "1password"
-              "discord"
-              "spotify"
-              "steam"
-              "steam-unwrapped"
-              "xone-dongle-firmware"
-            ];
+          config.allowUnfree = true;
           overlays = [ inputs.self.overlays.default ];
         };
       mkHost =
