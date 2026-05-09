@@ -1,9 +1,6 @@
 { inputs, ... }:
 {
-  imports = [
-
-    ./users.nix
-  ];
+  imports = [ ./users.nix ];
 
   xyz.adtya.recipes = {
     core = {
@@ -54,5 +51,8 @@
 
   time.timeZone = "Asia/Kolkata";
 
-  system.configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
+  system = {
+    configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
+    etc.overlay.enable = true;
+  };
 }
