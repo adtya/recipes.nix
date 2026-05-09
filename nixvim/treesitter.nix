@@ -15,11 +15,13 @@
       gitcommit
       gitignore
       hyprlang
+      javascript
       json
       lua
       markdown
       markdown_inline
       nix
+      python
       regex
       toml
       yaml
