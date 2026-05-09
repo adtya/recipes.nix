@@ -84,6 +84,14 @@ in
         };
       };
     };
+
+    environment.etc."subuid".text = ''
+      ${cfg.primary.name}:100000:65536
+    '';
+    environment.etc."subgid".text = ''
+      users:100000:65536
+    '';
+
     services.userborn.enable = true;
     systemd.tmpfiles.rules = [
       "d  ${cfg.primary.home}/.config 0755 ${cfg.primary.name} ${cfg.primary.group} - -"

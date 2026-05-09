@@ -1,8 +1,8 @@
 { inputs, ... }:
 {
   imports = [
-    inputs.sops-nix.nixosModules.sops
     inputs.nixvim.nixosModules.nixvim
+    inputs.sops-nix.nixosModules.sops
 
     ./module.nix
   ];
