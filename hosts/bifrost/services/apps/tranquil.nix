@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ pkgs, inputs, ... }:
 let
   inherit (pkgs.stdenv.hostPlatform) system;
   domainName = "at.ironyofprivacy.org";
