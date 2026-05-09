@@ -1,7 +1,10 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
   imports = [
+    inputs.impermanence.nixosModules.impermanence
+
     ./hardware
+    ./persistence
     ./remote
     ./services
   ];

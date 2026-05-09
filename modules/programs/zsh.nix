@@ -1,6 +1,7 @@
 { lib, config, ... }:
 let
   cfg = config.xyz.adtya.recipes.programs.zsh;
+  user-cfg = config.xyz.adtya.recipes.core.users.primary;
 in
 {
   options = {
@@ -26,6 +27,7 @@ in
         autosuggestions.enable = true;
         syntaxHighlighting.enable = true;
         vteIntegration = true;
+        histFile = "$HOME/.local/share/zsh/zsh_history";
         interactiveShellInit = ''
           autoload edit-command-line
           zle -N edit-command-line
