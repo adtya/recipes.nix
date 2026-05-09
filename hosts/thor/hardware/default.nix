@@ -21,11 +21,9 @@
       kernelModules = [ "dm-snapshot" ];
     };
 
-    extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
     kernelModules = [
       "kvm-amd"
       "ntsync"
-      "v4l2loopback"
     ];
   };
 
