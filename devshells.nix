@@ -2,16 +2,15 @@
 {
   default = pkgs.mkShell {
     buildInputs = with pkgs; [
+      age
       disko
       dnscontrol
       git
-      age
+      mdbook
+      nurl
+      pyinfra
       sops
       ssh-to-age
-      nil
-      mdbook
-      disko
-      nurl
     ];
   };
 }
