@@ -8,7 +8,6 @@
   };
   inputs = {
     disko.url = "github:nix-community/disko?ref=latest";
-    jovian.url = "github:Jovian-Experiments/Jovian-NixOS?ref=development";
     lanzaboote.url = "github:nix-community/lanzaboote?ref=master";
     nixos-hardware.url = "github:NixOS/nixos-hardware?ref=master";
     nixpkgs.url = "github:NixOS/nixpkgs?ref=nixos-unstable";
@@ -17,11 +16,8 @@
     sops-nix.url = "github:Mic92/sops-nix?ref=master";
     treefmt-nix.url = "github:numtide/treefmt-nix?ref=main";
 
-    tranquil-pds.url = "git+https://tangled.org/tranquil.farm/tranquil-pds";
-
     adtyaxyz.url = "git+https://codeberg.org/adtya/adtya.xyz?ref=main";
     wiki.url = "git+https://codeberg.org/adtya/wiki?ref=main";
-    the-power-button.url = "git+https://codeberg.org/adtya/the-power-button?ref=main";
   };
 
   outputs =
@@ -90,12 +86,8 @@
       nixosConfigurations = lib.mapAttrs mkHost {
         Bifrost = "x86_64-linux";
         Gloria = "x86_64-linux";
-        Gwen = "x86_64-linux";
         Skipper = "x86_64-linux";
         Thor = "x86_64-linux";
-        Rico0 = "aarch64-linux";
-        Rico1 = "aarch64-linux";
-        Rico2 = "aarch64-linux";
       };
     };
 }
