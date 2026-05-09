@@ -8,6 +8,7 @@
   };
   inputs = {
     disko.url = "github:nix-community/disko?ref=latest";
+    impermanence.url = "github:nix-community/impermanence?ref=master";
     lanzaboote.url = "github:nix-community/lanzaboote?ref=master";
     nixos-hardware.url = "github:NixOS/nixos-hardware?ref=master";
     nixpkgs.url = "github:NixOS/nixpkgs?ref=nixos-unstable";
