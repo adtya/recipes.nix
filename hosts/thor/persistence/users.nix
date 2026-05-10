@@ -14,7 +14,6 @@ in
         "Pictures"
         "Videos"
 
-        ".fly"
         {
           directory = ".gnupg";
           mode = "0700";
@@ -38,7 +37,6 @@ in
           directory = ".local/share/containers";
           mode = "0700";
         }
-        ".local/share/dino"
         ".local/share/direnv"
         ".local/share/flatpak"
         ".local/share/keyrings"
