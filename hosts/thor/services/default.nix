@@ -1,6 +1,5 @@
 _: {
   imports = [
-    ./ollama.nix
     ./udev.nix
   ];
 
