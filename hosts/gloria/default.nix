@@ -56,10 +56,20 @@ _: {
     presets = {
       desktop = true;
     };
+
+    virtualisation = {
+      containers.enable = true;
+    };
   };
   services = {
     thermald.enable = true;
     upower.enable = true;
+  };
+
+  virtualisation.containers = {
+    storage.settings = {
+      storage.driver = "btrfs";
+    };
   };
 
   system.stateVersion = "26.05";
