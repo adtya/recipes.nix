@@ -51,7 +51,7 @@ _: {
       devtools.enable = true;
     };
 
-    networking.wireless = false;
+    networking.wireless = true;
 
     presets = {
       desktop = true;
