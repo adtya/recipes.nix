@@ -1,7 +1,6 @@
 { lib, config, ... }:
 let
   cfg = config.xyz.adtya.recipes.programs.zsh;
-  user-cfg = config.xyz.adtya.recipes.core.users.primary;
 in
 {
   options = {

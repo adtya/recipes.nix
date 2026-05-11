@@ -1,7 +1,5 @@
 _: {
-  imports = [
-    ./udev.nix
-  ];
+  imports = [ ./udev.nix ];
 
   services = {
     ratbagd.enable = true;
