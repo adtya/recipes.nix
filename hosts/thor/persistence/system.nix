@@ -2,6 +2,7 @@ _: {
   environment.persistence."/persist/state" = {
     hideMounts = true;
     directories = [
+      "/etc/lact"
       {
         directory = "/var/lib/bluetooth";
         user = "root";
