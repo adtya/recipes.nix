@@ -27,6 +27,7 @@ in
 
         ".config/1Password"
         ".config/discord"
+        ".config/easyeffects"
         ".config/doctl"
         ".config/gh"
         ".config/lazygit"
