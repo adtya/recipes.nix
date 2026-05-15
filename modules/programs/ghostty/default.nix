@@ -23,7 +23,7 @@ in
       package = lib.mkOption {
         type = lib.types.package;
         default = pkgs.ghostty;
-        description = "Ghostty package package";
+        description = "Ghostty package";
       };
     };
   };

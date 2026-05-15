@@ -8,14 +8,9 @@ let
   cfg = config.xyz.adtya.recipes.presets;
   packages = with pkgs; [
     btop
-    celluloid
     evince
     file
     localsend
-    (mpv.override {
-      youtubeSupport = true;
-      scripts = with pkgs.mpvScripts; [ mpris ];
-    })
     (imv.overrideAttrs (
       _final: _prev: {
         postInstall = ''

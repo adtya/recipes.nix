@@ -3,6 +3,7 @@
   imports = [
     ./firefox
     ./ghostty
+    ./mpv
 
     ./fonts.nix
     ./starship.nix
