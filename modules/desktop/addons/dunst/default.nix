@@ -38,6 +38,7 @@ in
         ExecStart = lib.getExe pkgs.dunst;
         ExecReload = "${lib.getExe' pkgs.dunst "dunstctl"} reload";
         Restart = "on-failure";
+        Slice = "background.slice";
       };
     };
   };

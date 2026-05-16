@@ -42,6 +42,7 @@ in
           serviceConfig = {
             ExecStart = lib.getExe' pkgs.awww "awww-daemon";
             Restart = "on-failure";
+            Slice = "session.slice";
           };
         };
         update-wallpaper = {
@@ -60,6 +61,7 @@ in
             Type = "oneshot";
             ExecStart = lib.getExe wallpaperScript;
             Restart = "on-failure";
+            Slice = "background.slice";
           };
         };
       };
