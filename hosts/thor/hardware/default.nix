@@ -1,14 +1,10 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ lib, pkgs, ... }:
 {
   imports = [ ./filesystem.nix ];
 
   boot = {
     kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
+    kernelParams = [ "video=DP-1:3440x1440@175" ];
 
     initrd = {
       availableKernelModules = [
@@ -26,8 +22,6 @@
       "ntsync"
     ];
   };
-
-  environment.sessionVariables.VDPAU_DRIVER = "radeonsi";
 
   hardware = {
     amdgpu = {
