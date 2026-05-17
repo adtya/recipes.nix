@@ -6,6 +6,18 @@
 }:
 let
   cfg = config.xyz.adtya.recipes.presets;
+  user-cfg = config.xyz.adtya.recipes.core.users.primary;
+  xdg-dirs = {
+    DESKTOP = "Desktop";
+    DOCUMENTS = "Documents";
+    DOWNLOADS = "Downloads";
+    MUSIC = "Music";
+    PICTURES = "Pictures";
+    PROJECTS = "Projects";
+    SCREENSHOTS = "Pictures/Screenshots";
+    VIDEOS = "Videos";
+  };
+
   packages = with pkgs; [
     btop
     evince
@@ -20,6 +32,7 @@ let
     ))
     unzip
     wl-clipboard
+    xdg-user-dirs
     xdg-utils
   ];
   extra-packages = with pkgs; [
@@ -62,7 +75,10 @@ in
       pathsToLink = [ "/share" ];
       sessionVariables = {
         NIXOS_OZONE_WL = 1;
-      };
+      }
+      // (lib.attrsets.mapAttrs' (
+        name: value: lib.nameValuePair "XDG_${name}_DIR" "$HOME/${value}"
+      ) xdg-dirs);
       systemPackages = if cfg.desktop-minimal then packages else (packages ++ extra-packages);
     };
 
@@ -112,5 +128,16 @@ in
       enable = true;
       xdgOpenUsePortal = true;
     };
+
+    systemd.tmpfiles.settings.xdg-dirs = lib.attrsets.mapAttrs' (
+      _name: value:
+      lib.nameValuePair "${user-cfg.home}/${value}" {
+        d = {
+          user = user-cfg.name;
+          inherit (user-cfg) group;
+          mode = "755";
+        };
+      }
+    ) xdg-dirs;
   };
 }
