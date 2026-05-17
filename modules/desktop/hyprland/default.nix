@@ -124,10 +124,18 @@ in
       };
     };
 
-    systemd.tmpfiles.rules = [
-      "d  ${user-cfg.home}/.config/hypr               0755 ${user-cfg.name} ${user-cfg.group} - -"
-      "L+ ${user-cfg.home}/.config/hypr/hyprland.conf -    -                -                 - ${hyprland-conf}"
-    ];
+    systemd.tmpfiles.settings.hypr = {
+      "${user-cfg.home}/.config/hypr".d = {
+        user = user-cfg.name;
+        inherit (user-cfg) group;
+        mode = "755";
+      };
+    };
+    systemd.tmpfiles.settings.hyprland = {
+      "${user-cfg.home}/.config/hypr/hyprland.conf"."L+" = {
+        argument = "${hyprland-conf}";
+      };
+    };
 
     programs = {
       dconf = {

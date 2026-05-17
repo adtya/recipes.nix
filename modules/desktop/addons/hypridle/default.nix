@@ -84,10 +84,17 @@ in
 
   config = lib.mkIf cfg.enable {
     services.hypridle.enable = true;
-
-    systemd.tmpfiles.rules = [
-      "d  ${user-cfg.home}/.config/hypr               0755 ${user-cfg.name} ${user-cfg.group} - -"
-      "L+ ${user-cfg.home}/.config/hypr/hypridle.conf -    -                -                 - ${hypridle-conf}"
-    ];
+    systemd.tmpfiles.settings.hypr = {
+      "${user-cfg.home}/.config/hypr".d = {
+        user = user-cfg.name;
+        inherit (user-cfg) group;
+        mode = "755";
+      };
+    };
+    systemd.tmpfiles.settings.hypridle = {
+      "${user-cfg.home}/.config/hypr/hypridle.conf"."L+" = {
+        argument = "${hypridle-conf}";
+      };
+    };
   };
 }

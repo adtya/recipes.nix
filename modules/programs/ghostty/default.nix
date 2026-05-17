@@ -31,9 +31,15 @@ in
   config = lib.mkIf cfg.enable {
     environment.systemPackages = [ cfg.package ];
 
-    systemd.tmpfiles.rules = [
-      "d  ${user-cfg.home}/.config/ghostty                0755 ${user-cfg.name} ${user-cfg.group} - -"
-      "L+ ${user-cfg.home}/.config/ghostty/config.ghostty -    -                -                 - ${ghostty-conf}"
-    ];
+    systemd.tmpfiles.settings.ghostty = {
+      "${user-cfg.home}/.config/ghostty".d = {
+        user = user-cfg.name;
+        inherit (user-cfg) group;
+        mode = "755";
+      };
+      "${user-cfg.home}/.config/ghostty/config.ghostty"."L+" = {
+        argument = "${ghostty-conf}";
+      };
+    };
   };
 }

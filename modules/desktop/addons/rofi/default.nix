@@ -23,11 +23,23 @@ in
 
   config = lib.mkIf cfg.enable {
     environment.systemPackages = [ pkgs.rofi ];
-    systemd.tmpfiles.rules = [
-      "d  ${user-cfg.home}/.config/rofi                     0755 ${user-cfg.name} ${user-cfg.group} - -"
-      "d  ${user-cfg.home}/.config/rofi/themes              0755 ${user-cfg.name} ${user-cfg.group} - -"
-      "L+ ${user-cfg.home}/.config/rofi/config.rasi         -    -                -                 - ${./config.rasi}"
-      "L+ ${user-cfg.home}/.config/rofi/themes/dracula.rasi -    -                -                 - ${./dracula.rasi}"
-    ];
+    systemd.tmpfiles.settings.rofi = {
+      "${user-cfg.home}/.config/rofi".d = {
+        user = user-cfg.name;
+        inherit (user-cfg) group;
+        mode = "755";
+      };
+      "${user-cfg.home}/.config/rofi/themes".d = {
+        user = user-cfg.name;
+        inherit (user-cfg) group;
+        mode = "755";
+      };
+      "${user-cfg.home}/.config/rofi/config.rasi"."L+" = {
+        argument = "${./config.rasi}";
+      };
+      "${user-cfg.home}/.config/rofi/themes/dracula.rasi"."L+" = {
+        argument = "${./dracula.rasi}";
+      };
+    };
   };
 }

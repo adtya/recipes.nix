@@ -21,9 +21,17 @@ in
   };
   config = lib.mkIf cfg.enable {
     security.pam.services.hyprlock = { };
-    systemd.tmpfiles.rules = [
-      "d  ${user-cfg.home}/.config/hypr               0755 ${user-cfg.name} ${user-cfg.group} - -"
-      "L+ ${user-cfg.home}/.config/hypr/hyprlock.conf -    -                -                 - ${hyprlock-conf}"
-    ];
+    systemd.tmpfiles.settings.hypr = {
+      "${user-cfg.home}/.config/hypr".d = {
+        user = user-cfg.name;
+        inherit (user-cfg) group;
+        mode = "755";
+      };
+    };
+    systemd.tmpfiles.settings.hyprlock = {
+      "${user-cfg.home}/.config/hypr/hyprlock.conf"."L+" = {
+        argument = "${hyprlock-conf}";
+      };
+    };
   };
 }

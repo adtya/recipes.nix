@@ -21,10 +21,16 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    systemd.tmpfiles.rules = [
-      "d  ${user-cfg.home}/.config/dunst         0755 ${user-cfg.name} ${user-cfg.group} - -"
-      "L+ ${user-cfg.home}/.config/dunst/dunstrc -    -                -                 - ${./dunstrc}"
-    ];
+    systemd.tmpfiles.settings.dunst = {
+      "${user-cfg.home}/.config/dunst".d = {
+        user = user-cfg.name;
+        inherit (user-cfg) group;
+        mode = "755";
+      };
+      "${user-cfg.home}/.config/dunst/dunstrc"."L+" = {
+        argument = "${./dunstrc}";
+      };
+    };
 
     systemd.user.services.dunst = {
       wantedBy = [ "graphical-session.target" ];

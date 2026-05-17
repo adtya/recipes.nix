@@ -41,13 +41,19 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-
     programs.waybar.enable = true;
-
-    systemd.tmpfiles.rules = [
-      "d  ${user-cfg.home}/.config/waybar              0755 ${user-cfg.name} ${user-cfg.group} - -"
-      "L+ ${user-cfg.home}/.config/waybar/config.jsonc -    -                -                 - ${waybar-config-file}"
-      "L+ ${user-cfg.home}/.config/waybar/style.css    -    -                -                 - ${waybar-style}"
-    ];
+    systemd.tmpfiles.settings.waybar = {
+      "${user-cfg.home}/.config/waybar".d = {
+        user = user-cfg.name;
+        inherit (user-cfg) group;
+        mode = "755";
+      };
+      "${user-cfg.home}/.config/waybar/config.jsonc"."L+" = {
+        argument = "${waybar-config-file}";
+      };
+      "${user-cfg.home}/.config/waybar/style.css"."L+" = {
+        argument = "${waybar-style}";
+      };
+    };
   };
 }

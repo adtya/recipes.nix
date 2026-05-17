@@ -93,9 +93,13 @@ in
     '';
 
     services.userborn.enable = true;
-    systemd.tmpfiles.rules = [
-      "d  ${cfg.primary.home}/.config 0755 ${cfg.primary.name} ${cfg.primary.group} - -"
-    ];
+    systemd.tmpfiles.settings.xdg-config-dir = {
+      "${cfg.primary.home}/.config".d = {
+        user = cfg.primary.name;
+        group = cfg.primary.group;
+        mode = "755";
+      };
+    };
     users = {
       mutableUsers = false;
       users = {
